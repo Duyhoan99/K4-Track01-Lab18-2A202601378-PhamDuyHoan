@@ -165,13 +165,13 @@ USER MARKS UNCERTAINTY / AI CREATES REVIEW QUIZ / USER REVIEWS
     3. Bấm **"Bỏ qua (Esc)"**: Làm mờ và ẩn câu trả lời không ưng ý.
     4. Bấm nút **"⟲ Reset State"**: Khôi phục toàn bộ prototype về trạng thái Common Context ban đầu.
 
-#### 2. Prototype Annotation (Dành cho Facilitator kiểm thử Option A)
+#### 2. Prototype Annotation (Dành cho Facilitator kiểm thử Option)
 
 ```text
-OPTION A (AI In-session Q&A Assistant with Citation & User-driven Save)
-We expect the tester to: Thử bấm câu hỏi nhanh hoặc gõ câu hỏi khi gặp đoạn công thức khó ở Slide 14, đọc câu trả lời và số trang nguồn của AI, sau đó thử nghiệm bấm "Lưu vào Note" hoặc "Sửa trước khi lưu".
-Watch for: Tester có chú ý và click vào thẻ trích dẫn [Slide 14] để đối chiếu không; tester phản ứng thế nào khi AI không tự động lưu mà bắt bấm nút; tester mất bao lâu để đóng câu trả lời không cần thiết.
-Do not explain: Không chỉ tay bảo tester phải bấm nút nào; không giải thích thay cho câu trả lời của AI; để tester tự khám phá nút Mở slide nguồn và nút Hoàn tác (Undo).
+OPTION B PROTOTYPE (AI In-session Q&A Assistant with Citation, Failure Recovery & User-driven Save)
+We expect the tester to: Thử bấm câu hỏi nhanh hoặc gõ câu hỏi khi gặp đoạn kiến thức ở Slide 5, 12, 14, đọc câu trả lời và số trang nguồn của AI, sau đó thử nghiệm bấm "Lưu vào Note", "Sửa trước khi lưu" hoặc "⚠️ Báo sai / Hỏi Giảng viên".
+Watch for: Tester có chú ý và click vào thẻ trích dẫn [Slide X] để đối chiếu không; tester phản ứng thế nào khi AI trả lời sai/không đúng ý; tester có sử dụng nút gửi câu hỏi cho giảng viên không.
+Do not explain: Không chỉ tay bảo tester phải bấm nút nào; không giải thích thay cho câu trả lời của AI; để tester tự khám phá nút Mở slide nguồn, nút Inline Edit và nút Hoàn tác (Undo).
 ```
 
 #### 3. Tự kiểm·GATE 4 — Test-ready

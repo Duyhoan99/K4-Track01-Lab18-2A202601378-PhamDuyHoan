@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Micro-Prototype Option A — Trợ lý AI Q&A trong buổi học</title>
+  <title>Micro-Prototype — Trợ lý AI Q&A trong buổi học</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -19,6 +19,7 @@
       --text-muted: #94a3b8;
       --success: #34d399;
       --warning: #fbbf24;
+      --danger: #f87171;
       --border: rgba(255, 255, 255, 0.1);
       --radius: 12px;
     }
@@ -52,11 +53,12 @@
     .annotation-tag {
       background: #3b82f6;
       color: white;
-      padding: 2px 8px;
+      padding: 3px 10px;
       border-radius: 4px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 11px;
       text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     /* Main Workspace */
@@ -193,9 +195,9 @@
       color: var(--text-muted);
     }
 
-    /* Right side: AI Q&A Assistant (Option A Interaction Pane) */
+    /* Right side: AI Q&A Assistant */
     .assistant-pane {
-      width: 440px;
+      width: 450px;
       background: var(--bg-secondary);
       display: flex;
       flex-direction: column;
@@ -320,6 +322,7 @@
 
     .ai-actions {
       display: flex;
+      flex-wrap: wrap;
       gap: 8px;
       margin-top: 12px;
       padding-top: 10px;
@@ -360,6 +363,27 @@
     .btn-edit-note:hover {
       background: rgba(255, 255, 255, 0.05);
       color: white;
+    }
+
+    /* Failure Recovery Button */
+    .btn-report-teacher {
+      background: transparent;
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-report-teacher:hover {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border-color: #f59e0b;
     }
 
     .btn-dismiss {
@@ -520,8 +544,8 @@
   <!-- Facilitator Annotation Bar -->
   <div class="annotation-bar">
     <div>
-      <span class="annotation-tag">Option A Prototype</span>
-      &nbsp;<strong>Bộ 3 câu hỏi cơ bản:</strong> 1. RAG là gì? &bull; 2. Vector Embedding là gì? &bull; 3. Semantic Similarity là gì?
+      <span class="annotation-tag">OPTION B PROTOTYPE</span>
+      &nbsp;<strong>Bộ 3 câu hỏi cơ bản:</strong> 1. RAG là gì? • 2. Vector Embedding là gì? • 3. Semantic Similarity là gì?
     </div>
     <div>
       <button onclick="resetPrototype()" style="background: #374151; color:#d1d5db; border:none; padding:4px 10px; border-radius:4px; font-size:12px; cursor:pointer;">⟲ Reset State</button>
@@ -545,7 +569,7 @@
       <div class="slide-viewport">
         <div class="slide-canvas" id="slideCanvas">
           <div>
-            <div class="slide-topic" id="slideTopic">Khái niệm cốt lõi &bull; Tổng quan</div>
+            <div class="slide-topic" id="slideTopic">Khái niệm cốt lõi • Tổng quan</div>
             <div class="slide-heading" id="slideHeading">RAG là gì và tại sao cần dùng?</div>
             <div class="slide-body" id="slideBody">
               RAG (Retrieval-Augmented Generation) là kỹ thuật kết hợp giữa <strong>Truy xuất dữ liệu (Retrieval)</strong> từ tài liệu nội bộ và <strong>Mô hình ngôn ngữ (Generation)</strong> để tạo ra câu trả lời chính xác.
@@ -571,7 +595,7 @@
       </div>
     </div>
 
-    <!-- Right Pane: Option A In-Session AI Q&A Assistant -->
+    <!-- Right Pane: AI Q&A Assistant -->
     <div class="assistant-pane" id="assistantPane">
       <div class="assistant-header">
         <div class="assistant-title">
@@ -631,10 +655,10 @@
 
   </div>
 
-  <!-- Toast for Undo -->
+  <!-- Toast for Undo & Notification -->
   <div class="toast" id="toastNotice">
     <span id="toastText">Đã lưu vào Sổ tay ôn tập!</span>
-    <button class="toast-undo" onclick="undoLastSave()">Hoàn tác</button>
+    <button class="toast-undo" id="toastUndoBtn" onclick="undoLastSave()">Hoàn tác</button>
   </div>
 
   <!-- Inline Edit Modal -->
@@ -734,6 +758,9 @@
               <button class="btn-edit-note" onclick="openEditModal('${escapeQuotes(result.answer)}', '${result.section}')">
                 ✏️ Sửa trước khi lưu
               </button>
+              <button class="btn-report-teacher" onclick="reportToTeacher('${escapeQuotes(query)}')">
+                ⚠️ Báo sai / Hỏi Giảng viên
+              </button>
               <button class="btn-dismiss" onclick="dismissBubble(this)">Bỏ qua (Esc)</button>
             </div>
           `;
@@ -743,6 +770,9 @@
             <div style="color:#fbbf24;">${result.answer.replace(/\n/g, '<br>')}</div>
             <div style="margin-top:8px; font-size:11px; color:#94a3b8;">Hệ thống không tìm thấy căn cứ trong slide này.</div>
             <div class="ai-actions">
+              <button class="btn-report-teacher" onclick="reportToTeacher('${escapeQuotes(query)}')">
+                ⚠️ Hỏi trực tiếp Giảng viên
+              </button>
               <button class="btn-dismiss" onclick="dismissBubble(this)">Đóng</button>
             </div>
           `;
@@ -757,17 +787,17 @@
       document.getElementById("slidePageNum").textContent = `Slide ${slideNum < 10 ? '0' + slideNum : slideNum} / 60`;
       
       if (slideNum === 12) {
-        document.getElementById("slideTopic").textContent = "Cơ chế biểu diễn &bull; Vector Embedding";
+        document.getElementById("slideTopic").textContent = "Cơ chế biểu diễn • Vector Embedding";
         document.getElementById("slideHeading").textContent = "Vector Embedding là gì?";
         document.getElementById("slideBody").textContent = "Vector Embedding chuyển đổi từ ngữ, câu văn thành các vector số học nhiều chiều trong không gian ngữ nghĩa. Các từ có ý nghĩa gần nhau sẽ có tọa độ gần nhau.";
         document.getElementById("slideCallout").innerHTML = "🔢 <strong>Ví dụ:</strong> 'Vua' - 'Đàn ông' + 'Phụ nữ' ≈ 'Hoàng hậu'. Giúp máy tính hiểu mối quan hệ ý nghĩa thực sự.";
       } else if (slideNum === 14) {
-        document.getElementById("slideTopic").textContent = "Thuật toán tra cứu &bull; Semantic Similarity";
+        document.getElementById("slideTopic").textContent = "Thuật toán tra cứu • Semantic Similarity";
         document.getElementById("slideHeading").textContent = "Đo lường Semantic Similarity (Độ tương đồng)";
         document.getElementById("slideBody").textContent = "Hệ thống RAG tính khoảng cách hoặc góc giữa vector câu hỏi và vector tài liệu để chọn ra những đoạn văn bản phù hợp nhất.";
         document.getElementById("slideCallout").innerHTML = "🎯 <strong>Độ chính xác:</strong> Điểm số từ 0.0 đến 1.0. Các đoạn văn có điểm trên 0.85 sẽ được gửi trực tiếp cho LLM tổng hợp câu trả lời.";
       } else {
-        document.getElementById("slideTopic").textContent = "Khái niệm cốt lõi &bull; Tổng quan";
+        document.getElementById("slideTopic").textContent = "Khái niệm cốt lõi • Tổng quan";
         document.getElementById("slideHeading").textContent = "RAG là gì và tại sao cần dùng?";
         document.getElementById("slideBody").textContent = "RAG (Retrieval-Augmented Generation) là kỹ thuật kết hợp giữa Truy xuất dữ liệu (Retrieval) từ tài liệu nội bộ và Mô hình ngôn ngữ (Generation) để tạo ra câu trả lời chính xác.";
         document.getElementById("slideCallout").innerHTML = "💡 <strong>Lợi ích chính:</strong> Giúp AI trả lời bám sát tài liệu của buổi học, không bịa đặt thông tin (giảm thiểu Hallucination) và không cần huấn luyện lại model.";
@@ -783,7 +813,11 @@
       savedNotes.push(noteObj);
       lastSavedItem = noteObj;
       renderSavedNotes();
-      showToast("Đã lưu vào sổ tay ôn tập kèm " + citation);
+      showToast("Đã lưu vào sổ tay ôn tập kèm " + citation, true);
+    }
+
+    function reportToTeacher(queryText) {
+      showToast("⚠️ Đã chuyển tiếp câu hỏi tới Giảng viên để được giải đáp trực tiếp!", false);
     }
 
     function renderSavedNotes() {
@@ -819,9 +853,17 @@
       }
     }
 
-    function showToast(msg) {
+    function showToast(msg, showUndo) {
       const toast = document.getElementById("toastNotice");
+      const undoBtn = document.getElementById("toastUndoBtn");
       document.getElementById("toastText").textContent = msg;
+      
+      if (showUndo) {
+        undoBtn.style.display = "inline-block";
+      } else {
+        undoBtn.style.display = "none";
+      }
+
       toast.classList.add("show");
       setTimeout(() => {
         toast.classList.remove("show");
@@ -877,7 +919,7 @@
         </div>
       `;
       jumpToSlide(5);
-      showToast("Đã reset trạng thái Prototype về ban đầu!");
+      showToast("Đã reset trạng thái Prototype về ban đầu!", false);
     }
 
     function escapeQuotes(str) {
