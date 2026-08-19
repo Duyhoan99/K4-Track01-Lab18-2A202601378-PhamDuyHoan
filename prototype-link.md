@@ -9,6 +9,7 @@
 
 | Option | Tên giải pháp | Phụ trách | Prototype Link |
 | :--- | :--- | :--- | :--- |
-| **Option A** | **[AI] Trợ lý Q&A giải đáp nhanh có lưu nguồn** | **Phạm Duy Hoàn (2A202601378)** | [Mở Interactive Prototype Option A (HTML)](prototype-option-a.html) |
-| **Option B** | **[Non-AI] Mục lục Note–Slide liên kết thông minh** | *[Chưa cập nhật]* | *[Chờ thành viên cập nhật]* |
-| **Option C** | **[AI] Tạo Quiz ôn tập từ điểm "Chưa hiểu"** | *[Chưa cập nhật]* | *[Chờ thành viên cập nhật]* |
+| **All-in-One** | **[Toàn diện] Prototype chung tích hợp cả 3 Option (A, B, C)** | **Nhóm 2T1H** | [Mở Unified Interactive Prototype (HTML)](prototype.html) |
+| **Option A** | **[User-Led] User-Led Smart Bookmark** | **Phạm Duy Hoàn (2A202601378)** | [Mở Interactive Prototype Option A (HTML)](prototype-option-a.html) |
+| **Option B** | **[Co-create] Co-create AI Draft Notes** | **Nguyễn Khánh Toàn (2A202601843)** | [Mở trong Unified Prototype (Tab B)](prototype.html) |
+| **Option C** | **[Proactive] Proactive AI Notes** | **Phan Văn Tình (2A202601430)** | [Mở trong Unified Prototype (Tab C)](prototype.html) |

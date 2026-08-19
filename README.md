@@ -1,4 +1,3 @@
-
 ## Thông tin bài làm và Phân công vai trò nhóm (Team Role Matrix)
 
 - **Lớp / Khóa:** K4 - Track 01 (AI Product Development)
@@ -6,26 +5,21 @@
 - **Case đã chọn:** **Case B — AI Notes: Personal Learning Notes**
 - **Repo cá nhân nộp bài:** Thư mục: `K4-Track01-Lab18-2A202601378-PhamDuyHoan`
 
-**Thành viên nhóm:**
+**Thành viên nhóm & Phân công giải pháp:**
 
-1. Phan Văn Tình(MHV: 2A202601430)
+1. **Phạm Duy Hoàn (MHV: 2A202601378):** Phụ trách **Option A — User-Led Smart Bookmark**
+2. **Nguyễn Khánh Toàn (MHV: 2A202601843):** Phụ trách **Option B — Co-create AI Draft Notes**
+3. **Phan Văn Tình (MHV: 2A202601430):** Phụ trách **Option C — Proactive AI Notes**
 
-2. Phạm Duy Hoàn(MHV: 2A202601378)
-
-3. Nguyễn Khánh Toàn(MHV: 2A202601843)
+---
 
 **2. Hypothesis Problem:**
 
 Hypothesis Problem nhóm tiếp tục:
 
 > Khi tham gia các buổi học hoặc đào tạo có mật độ thông tin cao, người học có thói quen ghi chép hoặc highlight gặp khó khăn trong việc lưu lại đầy đủ các điểm quan trọng và phần chưa hiểu vì tốc độ tiếp nhận thông tin nhanh hơn khả năng ghi chép, đồng thời ghi chú thường bị tách rời khỏi tài liệu gốc, dẫn đến việc phải mất nhiều thời gian tra cứu lại sau buổi học.
->
-
-
 
 **Evidence ban đầu hỗ trợ giả thuyết:**
-
-
 
 > Trong Practice Note Day 17, tester P-01 kể rằng khi tham gia buổi đào tạo trực tuyến về quản lý rủi ro, diễn giả trình bày nhanh khiến tester chỉ kịp ghi một phần nội dung và phải đánh dấu các chỗ chưa rõ bằng dấu “?”. Sau buổi học, tester mất khoảng 45 phút đối chiếu lại file PDF 60 trang để chuẩn bị cho bài test 15 phút. Điều này cho thấy việc ghi chú không kịp và mất liên kết với tài liệu gốc có thể tạo ra chi phí tra cứu đáng kể.
 
@@ -34,11 +28,10 @@ Hypothesis Problem nhóm tiếp tục:
 * Vấn đề này có xảy ra thường xuyên với phần lớn người học, hay chỉ xảy ra trong một số buổi học đặc biệt nhiều thông tin.
 * Việc tra cứu lại ghi chú rời rạc có luôn gây tốn thời gian đáng kể với các người học khác hay không.
 * Người học có thực sự quay lại sử dụng ghi chú sau buổi học thường xuyên không.
-* Cách nào hỗ trợ tốt hơn: user tự chọn nội dung, AI đề xuất draft, hay AI tự tạo draft để user review.
-* AI-generated notes có giúp người học ôn tập hiệu quả hơn so với ghi chú hiện tại hay không.
-* Người học sẵn sàng trao cho AI bao nhiêu quyền quyết định trong việc chọn nội dung quan trọng hoặc “chưa hiểu”.
+* Cách nào hỗ trợ tốt hơn: User tự kiểm soát capture (User-Led), AI gợi ý draft từng mẩu để user duyệt (Co-create), hay AI tự tổng hợp toàn bộ bài học (Proactive).
+* Người học sẵn sàng trao cho AI bao nhiêu quyền tự chủ (Agency) trong việc chọn lọc nội dung ghi chú bài học.
 
-
+---
 
 ## Chặng 2 — Chọn ba Solution Options
 
@@ -46,65 +39,60 @@ Hypothesis Problem nhóm tiếp tục:
 
 Để phép so sánh A/B/C có ý nghĩa, cả ba option giữ nguyên cùng user, situation, task, desired outcome và content fixture.
 
-| Thành phần                   | Quyết định chung cho A/B/C                                                                                                           |
-| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
-| **Target user**          | Người học có thói quen ghi chép hoặc highlight khi tham gia các buổi học có mật độ thông tin cao.                        |
-| **Situation**            | Đang học qua slide/PDF và gặp một điểm quan trọng hoặc chưa hiểu; sau đó cần ôn lại.                                    |
-| **Task**                 | Tạo một tài nguyên ôn tập cá nhân từ những điểm quan trọng hoặc chưa hiểu, có thể quay lại đúng ngữ cảnh gốc.   |
-| **Desired outcome**      | Người học có thể xem lại đúng điểm cần ôn mà không phải dò toàn bộ slide/PDF hoặc chỉ dựa vào ghi chú rời rạc. |
-| **Content/data fixture** | Cùng một lesson RAG, cùng slide/PDF và cùng ba điểm: RAG, embeddings và semantic similarity.                                    |
+| Thành phần | Quyết định chung cho A/B/C |
+| :--- | :--- |
+| **Target user** | Người học có thói quen ghi chép hoặc highlight khi tham gia các buổi học có mật độ thông tin cao. |
+| **Situation** | Đang học qua slide/PDF và gặp một điểm quan trọng hoặc chưa hiểu; sau đó cần lưu lại để ôn tập. |
+| **Task** | Tạo một tài nguyên ghi chú bài học cá nhân từ những điểm quan trọng hoặc chưa hiểu, có thể quay lại đúng ngữ cảnh gốc. |
+| **Desired outcome** | Người học có thể xem lại đúng điểm cần ôn mà không phải dò toàn bộ slide/PDF hoặc chỉ dựa vào ghi chú rời rạc. |
+| **Content/data fixture** | Cùng một lesson RAG, cùng slide/PDF và cùng ba điểm: RAG, embeddings và semantic similarity. |
 
 ### 2. Ba Solution Options
 
-| Thành phần                   | **Option A — AI Q&A có lưu nguồn**                                                                                          | **Option B — Mục lục note–slide**                                                                               | **Option C — AI tạo quiz từ điểm “chưa hiểu”**                                                                          |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| **Solution mechanism**   | User hỏi trợ lý tại điểm chưa hiểu; AI trả lời dựa trên slide và user chọn lưu câu hỏi–trả lời kèm trang nguồn. | Hệ thống liên kết từng ghi chú hoặc đánh dấu của user với đúng trang slide PDF; không suy luận nội dung. | User đánh dấu đoạn “chưa hiểu”; AI tạo câu hỏi ôn tập ngắn từ đúng các đoạn đó và đính kèm trang nguồn.    |
-| **User làm gì?**       | Chủ động hỏi, đọc câu trả lời, chọn lưu hoặc không lưu.                                                                 | Tự viết note/highlight; mở mục lục để xem lại.                                                                    | Đánh dấu phần chưa hiểu, làm quiz, xem lại slide khi cần.                                                                     |
-| **AI làm gì?**         | Trả lời từ nội dung slide, hiển thị evidence/trang nguồn; không tự lưu.                                                     | Không có AI; hệ thống lưu liên kết page/slide theo thao tác của user.                                            | Tạo câu hỏi ôn tập từ phần user đã đánh dấu; chỉ là draft để user review.                                              |
-| **Trigger**              | User bấm “Hỏi AI” tại đoạn đang vướng.                                                                                      | User tạo note/highlight hoặc mở lại note.                                                                             | User đánh dấu “Chưa hiểu”, sau đó bấm “Tạo quiz ôn tập”.                                                                |
-| **Quyền quyết định** | User quyết định câu hỏi nào được lưu vào tài nguyên ôn tập.                                                            | User hoàn toàn quyết định nội dung note.                                                                            | User quyết định dùng, sửa, bỏ câu hỏi quiz hoặc tạo lại.                                                                    |
-| **Trade-off chính**     | Hiểu nhanh và có ngữ cảnh, nhưng có thể làm gián đoạn việc học; AI có thể trả lời thiếu hoặc chưa chính xác.   | Kiểm soát cao, ít rủi ro sai, nhưng user vẫn phải tự ghi và tự tổng hợp.                                      | Giảm công sức chuyển điểm chưa hiểu thành hoạt động ôn tập, nhưng AI có thể tạo câu hỏi không đúng trọng tâm. |
+| Thành phần | **Option A — User-Led Smart Bookmark** *(Duy Hoàn)* | **Option B — Co-create AI Draft Notes** *(Khánh Toàn)* | **Option C — Proactive AI Notes** *(Văn Tình)* |
+| :--- | :--- | :--- | :--- |
+| **Solution mechanism** | Người học vẫn là người kiểm soát nội dung cần capture. Khi họ thấy một thông tin quan trọng hoặc không kịp ghi, họ bấm **Mark current moment**. Hệ thống lưu timestamp, slide hiện tại, và một note ngắn nếu user nhập vào. | AI tạo **draft notes** từ transcript bài học và context slide. Người học review từng draft, sau đó chọn keep, edit, remove, hoặc mở source để kiểm tra. | AI **tự động capture và tổ chức** nội dung bài học thành một structured note hoàn chỉnh. Người học chủ yếu review output cuối, kiểm tra coverage nếu cần, rồi quyết định accept, edit, hoặc reject notes. |
+| **User làm gì?** | Chủ động bấm "Mark current moment" khi nghe điểm quan trọng/chưa rõ; gõ thêm note ngắn nếu muốn. | Đọc lướt từng draft card do AI sinh ra $\rightarrow$ chọn Keep, Edit, Remove hoặc mở Source để kiểm tra. | Tập trung 100% nghe giảng; khi kết thúc bài, đọc toàn bộ bản structured note, kiểm tra coverage, chọn Accept/Edit/Reject. |
+| **AI làm gì?** | Ghi nhận timestamp, liên kết đúng số trang slide và note ngắn của user; không tự ý suy diễn nội dung khi chưa có lệnh. | Lắng nghe transcript và context slide, tự động tạo các draft notes ngắn dạng thẻ gợi ý theo thời gian thực. | Tự động phân tích, trích xuất, cấu trúc hóa và biên soạn toàn bộ nội dung bài học thành một bản ghi chú hoàn chỉnh. |
+| **Trigger** | Người học bấm "Mark current moment" (hoặc phím tắt nhanh). | Xuất hiện tự động theo từng ý mới trong transcript hoặc khi chuyển slide. | Kết thúc bài học (End-of-lesson trigger). |
+| **Quyền quyết định** | Người học toàn quyền quyết định thời điểm và nội dung được capture. | Người học kiểm duyệt từng draft trước khi đưa vào sổ tay chính thức. | Người học kiểm soát ở đầu ra cuối cùng (Batch Review: Accept / Edit / Reject). |
+| **Trade-off chính** | Kiểm soát tối đa, 0% rủi ro AI ảo giác, nhưng người học vẫn phải phân tâm bấm nút trong lúc nghe giảng. | Giảm đáng kể công gõ chữ, nhưng người học cần phân tâm nhẹ để liên tục review các draft card xuất hiện. | Người học hoàn toàn rảnh tay khi học, nhưng mất công kiểm tra lại toàn bộ bản note dài ở cuối bài và có nguy cơ AI bỏ sót ý quan trọng. |
 
-### 3. Distance Check
+### 3. Distance Check (Phổ mức độ tự chủ Human–AI)
 
-**A khác B vì** A cho AI tham gia giải thích nội dung khi user đang vướng và user lưu kết quả; B không dùng AI để suy luận hay giải thích, chỉ liên kết note do user tạo với trang PDF gốc.
+**A khác B vì:** Option A hoàn toàn do người học chủ động kích hoạt (User-Led Capture) và chỉ lưu vị trí/note ngắn của user; Option B do AI chủ động tạo trước các đoạn tóm tắt (Draft Notes) theo thời gian thực để user duyệt từng cái.
 
-**B khác C vì** B giữ nguyên nội dung do user tự ghi và hỗ trợ tìm lại ngữ cảnh; C dùng AI biến các điểm user đánh dấu thành câu hỏi ôn tập để hỗ trợ recall.
+**B khác C vì:** Option B cho user tương tác và duyệt theo từng mẩu nhỏ (Micro Review: Keep/Edit/Remove từng draft trong khi học); Option C dồn toàn bộ việc xử lý cho AI và user chỉ review một lần ở cuối bài học (Macro Review: Accept/Edit/Reject bản Structured Note hoàn chỉnh).
 
-**A khác C vì** A giải quyết sự vướng mắc ngay trong lúc học bằng hỏi–đáp có nguồn; C hỗ trợ ôn lại sau đó bằng quiz được tạo từ các điểm chưa hiểu.
+**A khác C vì:** Option A là mức tự chủ AI thấp nhất (User kiểm soát 100%); Option C là mức tự chủ AI cao nhất (AI tự động làm tất cả từ đầu đến cuối).
 
 ```text
-OPTION B
-USER CREATES NOTES / SYSTEM LINKS CONTEXT
-
-        ↓
-
-OPTION A
-USER ASKS / AI ANSWERS / USER SAVES
-
-        ↓
-
-OPTION C
-USER MARKS UNCERTAINTY / AI CREATES REVIEW QUIZ / USER REVIEWS
+       MỨC TỰ CHỦ THẤP (USER-LED)                MỨC TỰ CHỦ TRUNG BÌNH (CO-CREATE)                MỨC TỰ CHỦ CAO (PROACTIVE)
+┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐     ┌──────────────────────────────────────┐
+│  OPTION A: USER-LED SMART BOOKMARK   │     │  OPTION B: CO-CREATE AI DRAFT NOTES  │     │     OPTION C: PROACTIVE AI NOTES     │
+│  • User bấm "Mark current moment"    │ ──> │  • AI sinh draft notes thời gian thực │ ──> │  • AI tự capture & tổ chức toàn bộ    │
+│  • Lưu timestamp, slide, note ngắn   │     │  • User review: Keep/Edit/Remove     │     │  • User review cuối: Accept/Edit/Rej │
+│  👉 Phụ trách: Phạm Duy Hoàn         │     │  👉 Phụ trách: Nguyễn Khánh Toàn     │     │  👉 Phụ trách: Phan Văn Tình         │
+└──────────────────────────────────────┘     └──────────────────────────────────────┘     └──────────────────────────────────────┘
 ```
 
 ### 4. Design Guardrails
 
-- Option A phải có nút **Save to review notes**; AI không tự lưu câu hỏi hoặc câu trả lời.
-- Option C phải cho user sửa, bỏ hoặc tạo lại quiz; mỗi câu hỏi cần có liên kết **View source: slide/page X**.
-- Cả ba option cùng dùng lesson RAG và cùng hướng đến việc tạo tài nguyên ôn tập có liên kết ngữ cảnh.
+- **Option A (User-Led):** Phải có nút **Mark current moment** bấm 1-chạm hoặc phím tắt; tự động bắt đúng số slide và timestamp; hỗ trợ gõ note ngắn tùy chọn.
+- **Option B (Co-create):** Mỗi draft note do AI tạo ra phải có đủ 4 hành động rõ ràng: **Keep**, **Edit**, **Remove**, và **View Source (Slide/Transcript)**.
+- **Option C (Proactive):** Phải cung cấp màn hình **Coverage Check** và bộ 3 hành động quyết định ở cuối bài: **Accept all**, **Edit section**, **Reject**.
 
 ---
 
 ## Phần thực hiện của cá nhân: Phạm Duy Hoàn (MHV: 2A202601378)
 
-- **Solution tôi chọn thực hiện:** **Option A — [AI] Trợ lý ảo giải đáp nhanh các câu hỏi vướng mắc / điều khoản luật ngay trong lúc học dựa trên nội dung slide.**
+- **Solution tôi chọn thực hiện:** **Option A — User-Led Smart Bookmark** *(Người học kiểm soát capture; bấm Mark moment để lưu timestamp, slide hiện tại và note ngắn)*.
 
 ### 1. Đóng góp của tôi trong bài làm Day 18
-1. **Thiết kế chi tiết Human–AI Interaction cho Option A:** Định nghĩa 4 quyết định thiết kế, xây dựng bảng tương tác, chốt mức độ agency và cơ chế recovery khi AI trả lời sai/không tìm thấy thông tin.
-2. **Xây dựng Interactive Micro-Prototype cho Option A (Chặng 4):** Xây dựng giao diện web tương tác [prototype-option-a.html](file:///d:/VIN_BaiLab/Track%201%20chuyen%20sau/K4-Track01-Lab18-2A202601378-PhamDuyHoan/prototype-option-a.html) với 3 trạng thái rõ ràng, hỗ trợ đầy đủ trigger hỏi đáp, trích nguồn 1-click, inline-edit, dismiss, undo và nút reset state.
+1. **Thiết kế chi tiết Human–AI Interaction cho Option A:** Định nghĩa 4 quyết định thiết kế cho cơ chế User-Led Smart Bookmark, xây dựng bảng tương tác, chốt mức độ agency và cơ chế recovery khi bấm nhầm hoặc muốn sửa note.
+2. **Xây dựng Interactive Micro-Prototype cho Option A (Chặng 4):** Xây dựng giao diện web tương tác [prototype-option-a.html](prototype-option-a.html) với nút 1-chạm *"Mark Current Moment"*, tự động bắt timestamp & slide, ô nhập note ngắn tùy chọn, và danh sách bookmark feed với đầy đủ Edit/Delete/View Source.
 3. **Trực tiếp Facilitate phiên kiểm thử Option A:** Điều phối phiên test thực tế với Tester T-02 (35 phút), ghi nhận quan sát trực tiếp, trích dẫn, ma sát và phản hồi của người học.
-4. **Cập nhật dữ liệu cá nhân vào các tài liệu nhóm:** Điền kết quả Option A vào [three-option-design-sheet.md](file:///d:/VIN_BaiLab/Track%201%20chuyen%20sau/K4-Track01-Lab18-2A202601378-PhamDuyHoan/three-option-design-sheet.md), [prototype-link.md](file:///d:/VIN_BaiLab/Track%201%20chuyen%20sau/K4-Track01-Lab18-2A202601378-PhamDuyHoan/prototype-link.md) và [group-feedback-synthesis.md](file:///d:/VIN_BaiLab/Track%201%20chuyen%20sau/K4-Track01-Lab18-2A202601378-PhamDuyHoan/group-feedback-synthesis.md).
+4. **Cập nhật dữ liệu cá nhân vào các tài liệu nhóm:** Điền kết quả Option A vào [three-option-design-sheet.md](three-option-design-sheet.md), [prototype-link.md](prototype-link.md) và [group-feedback-synthesis.md](group-feedback-synthesis.md).
 5. **Viết AI Support Log cá nhân:** Tự đánh giá quá trình tương tác với AI và ghi lại các điểm bản thân đã tự điều chỉnh.
 
 ---
@@ -113,38 +101,38 @@ USER MARKS UNCERTAINTY / AI CREATES REVIEW QUIZ / USER REVIEWS
 
 #### Bốn quyết định thiết kế
 1. **Expectation (Kỳ vọng & Giới hạn):**
-   - *Trước khi AI hoạt động:* Giao diện hiển thị placeholder định hướng rõ ràng: *"Hỏi nhanh điều khoản, định nghĩa hoặc nội dung từ tài liệu [Tên tài liệu.pdf]"*. User hiểu rõ AI là công cụ tra cứu nội bộ slide, không phải chatbot tự do.
-   - *Capability:* Trích xuất định nghĩa, giải thích thuật ngữ, đối chiếu nội dung trong slide và gắn nhãn số trang/đoạn cụ thể (`Slide X, Đoạn Y`).
-   - *Limit:* AI chỉ tra cứu nội dung trong slide bài học, không tự ý suy diễn hoặc tìm ngoài luồng; không thay thế văn bản quy phạm pháp luật chính thức.
+   - *Trước khi hoạt động:* Giao diện hiển thị rõ ràng nút bấm *"🔖 Mark Current Moment"* kèm phím tắt `[M]`. User hiểu rõ hệ thống sẽ đánh dấu đúng mốc thời gian và trang slide đang mở, kèm ghi chú ngắn nếu user muốn nhập.
+   - *Capability:* Bắt chính xác timestamp (giờ:phút:giây), số trang slide hiện tại (`Slide 05, 12, 14`), và lưu kèm note cá nhân của user.
+   - *Limit:* Hệ thống không tự ý tóm tắt dài dòng hay tự ý thêm bớt nội dung khi user chưa bấm Mark.
 2. **Role and Agency (Phân vai & Mức độ chủ động):**
-   - *Phân vai:* User chủ động hỏi khi bị nghẽn, đọc câu trả lời và quyết định bấm *"Lưu vào Note"* hoặc bỏ qua. AI trả lời ngắn gọn và trích dẫn số trang nguồn; không tự ý lưu vào note.
-   - *Agency tại Critical Moment:* **Ask / Suggest (không tự ý Act)** — AI chỉ hiển thị draft câu trả lời ở sidebar và chờ user bấm *"Lưu vào Note"*, tránh làm loãng ghi chú cá nhân của người học.
-   - *Hậu quả khi sai:* User chỉ mất 3–5 giây đọc lướt; rất dễ phát hiện vì AI luôn dẫn kèm số trang slide gốc.
+   - *Phân vai:* User toàn quyền quyết định khi nào cần đánh dấu khoảnh khắc quan trọng. Hệ thống đóng vai trò thư ký ghi nhớ tọa độ chính xác.
+   - *Agency tại Critical Moment:* **User-Led (Don't Act without trigger)** — Hệ thống chỉ ghi nhận khi có thao tác bấm từ người học, đảm bảo sổ tay hoàn toàn sạch sẽ và chỉ chứa những gì người học thực sự quan tâm.
+   - *Hậu quả khi sai:* User chỉ mất 1 click xóa hoặc sửa; rủi ro bằng 0 vì nội dung do chính user kiểm soát.
 3. **Evidence and Uncertainty (Căn cứ & Xử lý bất định):**
-   - *Evidence:* Thẻ trích dẫn trực quan (`Citation Badge`: *Slide 14 - Mục 2.3*) và đoạn trích dẫn nguyên văn ngắn.
-   - *Uncertainty:* Khi câu hỏi ngoài phạm vi hoặc độ tin cậy thấp, AI thông báo rõ: *"Nội dung này không được đề cập rõ trong slide buổi học. Dưới đây là các phần gần nhất có liên quan: [...]"*.
+   - *Evidence:* Thẻ bookmark luôn hiển thị rõ `Slide X` và `Timestamp 09:15:30`. Khi click vào thẻ, slide bài giảng lập tức nhảy về đúng trang đó và phát sáng câu chứng cứ màu vàng.
+   - *Uncertainty:* Nếu user bấm Mark mà không nhập chữ, hệ thống tự động gán nhãn *"Đánh dấu khoảnh khắc Slide X"* để user không bị rỗng nội dung.
 4. **Control and Recovery (Kiểm soát & Phục hồi):**
-   - *Kiểm soát:* Preview câu trả lời, Edit nội dung trước khi lưu, Dismiss nhanh bằng phím `Esc`/nút `X`, Undo/Delete ghi chú đã lưu.
-   - *Phục hồi:* Khi AI trả lời sai/không tìm thấy: User bấm nút *"Mở slide liên quan"* để tự xem tài liệu hoặc bấm icon `?` để tra cứu lại sau mà không gián đoạn bài giảng.
+   - *Kiểm soát:* Nút 1-chạm Mark moment, Inline Edit trực tiếp trên thẻ bookmark, Toggle cờ "❓ Chưa hiểu", Nút Xóa (Delete).
+   - *Phục hồi:* Hỗ trợ Hoàn tác (Undo) ngay sau khi xóa hoặc đánh dấu nhầm; nút Reset State khôi phục trạng thái ban đầu.
 
 #### Human–AI Decision Table cho Option A
 
-| Tiêu chí / Quyết định | **Option A — Trợ lý AI Q&A giải đáp nhanh có lưu nguồn** *(Duy Hoàn thực hiện)* |
+| Tiêu chí / Quyết định | **Option A — User-Led Smart Bookmark** *(Duy Hoàn thực hiện)* |
 | :--- | :--- |
-| **User làm gì? AI làm gì?** | **User:** Gõ/nói câu hỏi vướng mắc; đọc câu trả lời; chọn lưu vào note kèm nguồn hoặc đóng chat. <br>**AI:** Tra cứu semantic trên slide bài học, sinh câu trả lời ngắn gọn + đính kèm số trang nguồn. |
-| **AI Act / Ask / Don't Act? Vì sao?** | **Ask / Suggest**: AI sinh câu trả lời nhưng **chờ User bấm Lưu**. Giúp user kiểm soát trọn vẹn chất lượng note cá nhân. |
-| **User hiểu capability/limit bằng gì?** | Placeholder hướng dẫn, badge hiển thị tài liệu nguồn đang tra cứu, disclaimer *"Chỉ trả lời từ nội dung slide bài học"*. |
-| **Evidence & Uncertainty được thể hiện thế nào?** | Trích dẫn trực tiếp `Slide X, đoạn Y`. Nếu độ tin cậy thấp, báo rõ *"Không tìm thấy trong tài liệu"*. |
-| **User kiểm soát và recovery thế nào?** | Preview câu trả lời, edit nội dung trước khi lưu, dismiss bằng phím `Esc`/nút `X`, mở slide gốc bằng 1 click. |
+| **User làm gì? AI/Hệ thống làm gì?** | **User:** Bấm nút "Mark current moment" (hoặc phím `M`) khi nghe điểm quan trọng; gõ thêm note ngắn nếu muốn. <br>**Hệ thống:** Lưu chính xác timestamp, liên kết đúng số trang slide và note cá nhân vào sổ tay. |
+| **AI Act / Ask / Don't Act? Vì sao?** | **Don't Act without trigger (User-Led)**: Chỉ kích hoạt khi user bấm nút. Giúp người học kiểm soát 100% nội dung sổ tay. |
+| **User hiểu capability/limit bằng gì?** | Nút bấm có gắn phím tắt rõ ràng, nhãn hiển thị slide đang theo dõi, hướng dẫn *"Hệ thống sẽ lưu vị trí slide & timestamp hiện tại"*. |
+| **Evidence & Uncertainty được thể hiện thế nào?** | Thẻ bookmark gắn nhãn `Slide X • Timestamp`. Click vào thẻ sẽ mở đúng slide và highlight đoạn chứng cứ. |
+| **User kiểm soát và recovery thế nào?** | Sửa trực tiếp (Inline Edit), Xóa thẻ bookmark, Hoàn tác (Undo), mở lại slide gốc bằng 1-click. |
 
 #### Feedback and data check
-- Phản hồi của user (Like/Dislike, Edit draft) chỉ phục vụ tối ưu phiên học hiện tại, không làm biến đổi nội dung gốc của bài giảng.
-- Dữ liệu sử dụng giới hạn trong phạm vi slide bài học và câu hỏi tra cứu. Hỗ trợ xóa lịch sử hoặc dùng chế độ *"Phiên riêng tư (Incognito Session)"*.
+- Phản hồi của user (thêm note, sửa, xóa bookmark) được lưu cục bộ trong phiên học, không làm thay đổi bài giảng gốc.
+- Dữ liệu hoàn toàn riêng tư thuộc quyền sở hữu của người học.
 
 #### Tự kiểm·GATE 3 — Human Control
-- [x] **Rõ ràng vai trò Human & AI:** User toàn quyền quyết định nội dung nạp vào sổ tay; AI đóng vai trò tra cứu và dẫn nguồn.
-- [x] **Agency phù hợp rủi ro:** Vận hành ở mức **Suggest/Ask**, triệt tiêu nguy cơ AI tự động ghi đè hoặc tạo rác dữ liệu.
-- [x] **Cơ chế kiểm soát & Phục hồi hoàn chỉnh:** Cung cấp đầy đủ Preview, Edit, Dismiss (`Esc`/`X`), Undo và liên kết 1-click quay lại tài liệu gốc.
+- [x] **Rõ ràng vai trò Human & AI:** User là người kiểm soát hoàn toàn việc capture nội dung; hệ thống đảm bảo liên kết chính xác với ngữ cảnh slide.
+- [x] **Agency phù hợp rủi ro:** Vận hành ở mức **User-Led**, triệt tiêu nguy cơ AI tự động tạo rác hoặc hiểu sai ý định của người học.
+- [x] **Cơ chế kiểm soát & Phục hồi hoàn chỉnh:** Cung cấp đầy đủ Inline Edit, Delete, Undo và 1-click quay lại trang slide gốc.
 
 ---
 
@@ -152,32 +140,29 @@ USER MARKS UNCERTAINTY / AI CREATES REVIEW QUIZ / USER REVIEWS
 
 #### 1. Scope chuẩn của Micro-Prototype Option A
 - **Trạng thái 1: COMMON CONTEXT (Màn hình bài học chung):**
-  - Màn hình bài giảng slide PDF (Slide 14/60: *Đo lường sự tương đồng ngữ nghĩa: Cosine Similarity*).
-  - Khung Trợ lý AI tích hợp bên phải với huy hiệu tài liệu nguồn `RAG_Lesson.pdf` và các nút gợi ý câu hỏi nhanh (Quick Prompts).
-- **Trạng thái 2: CRITICAL INTERACTION (Tương tác hỏi–đáp và trích nguồn):**
-  - Tester gửi câu hỏi (tự gõ hoặc 1-click); AI phản hồi nhanh trong 1 giây với 2 gạch đầu dòng tóm tắt.
-  - Thẻ trích dẫn `🔗 Trích nguồn: Slide 14` có thể click để nhảy/highlight trực tiếp slide gốc.
-  - Xử lý câu hỏi không có trong tài liệu (Uncertainty): AI cảnh báo rõ và chỉ gợi ý các slide gần nhất.
-- **Trạng thái 3: RESULT / USER DECISION & RECOVERY (Quyết định của người học):**
-  - Người học có 4 lựa chọn kiểm soát rõ ràng:
-    1. Bấm **"📌 Lưu vào Note"**: Lưu vào danh sách sổ tay bên dưới + Toast thông báo kèm nút **"Hoàn tác (Undo)"**.
-    2. Bấm **"✏️ Sửa trước khi lưu"**: Mở modal Inline Edit cho phép chỉnh sửa lại câu chữ theo ý mình.
-    3. Bấm **"Bỏ qua (Esc)"**: Làm mờ và ẩn câu trả lời không ưng ý.
-    4. Bấm nút **"⟲ Reset State"**: Khôi phục toàn bộ prototype về trạng thái Common Context ban đầu.
+  - Màn hình bài giảng slide PDF (Slide 05, 12, 14 / 60) với thanh trượt slide và hiển thị thời gian học theo thời gian thực.
+  - Khung Smart Bookmark bên phải với nút bấm 1-chạm **"🔖 Mark Current Moment"** (Phím tắt `[M]`) và ô nhập note ngắn.
+- **Trạng thái 2: CRITICAL INTERACTION (Đánh dấu khoảnh khắc & Ghi chú nhanh):**
+  - Người học bấm *"Mark Current Moment"*: Thẻ bookmark được tạo ngay lập tức trong 0.1 giây, tự động đính kèm `Slide 05` và `Timestamp hiện tại`.
+  - Hỗ trợ gõ nhanh 1 dòng note cá nhân và tích chọn cờ `❓ Chưa hiểu`.
+- **Trạng thái 3: RESULT / USER DECISION & RECOVERY (Quản lý & Đối chiếu Bookmark):**
+  - Danh sách Smart Bookmarks hiển thị theo dòng thời gian bài học.
+  - Khi click vào bất kỳ bookmark nào, slide bên trái lập tức chuyển đến đúng trang slide tương ứng và highlight nội dung.
+  - Hỗ trợ đầy đủ các nút kiểm soát: **✏️ Sửa note**, **🗑️ Xóa bookmark**, **⟲ Reset State**.
 
-#### 2. Prototype Annotation (Dành cho Facilitator kiểm thử Option)
+#### 2. Prototype Annotation (Dành cho Facilitator kiểm thử Option A)
 
 ```text
-OPTION B PROTOTYPE (AI In-session Q&A Assistant with Citation, Failure Recovery & User-driven Save)
-We expect the tester to: Thử bấm câu hỏi nhanh hoặc gõ câu hỏi khi gặp đoạn kiến thức ở Slide 5, 12, 14, đọc câu trả lời và số trang nguồn của AI, sau đó thử nghiệm bấm "Lưu vào Note", "Sửa trước khi lưu" hoặc "⚠️ Báo sai / Hỏi Giảng viên".
-Watch for: Tester có chú ý và click vào thẻ trích dẫn [Slide X] để đối chiếu không; tester phản ứng thế nào khi AI trả lời sai/không đúng ý; tester có sử dụng nút gửi câu hỏi cho giảng viên không.
-Do not explain: Không chỉ tay bảo tester phải bấm nút nào; không giải thích thay cho câu trả lời của AI; để tester tự khám phá nút Mở slide nguồn, nút Inline Edit và nút Hoàn tác (Undo).
+OPTION A PROTOTYPE (User-Led Smart Bookmark with Timestamp, Slide Linking & Quick Note)
+We expect the tester to: Thử bấm nút "Mark Current Moment" khi đang xem slide bài giảng, thử gõ một dòng ghi chú ngắn hoặc đánh dấu "Chưa hiểu", sau đó bấm vào thẻ bookmark đã lưu để kiểm tra xem slide có tự động nhảy đến đúng trang hay không.
+Watch for: Tester có thao tác bấm Mark nhanh chóng không; tester có gặp khó khăn khi vừa nghe giảng vừa gõ note không; tester có sử dụng tính năng click vào bookmark để đối chiếu lại slide gốc không.
+Do not explain: Không hướng dẫn tester phải bấm nút nào; để tester tự bấm nút "Mark Current Moment", tự sửa nội dung note và tự trải nghiệm cơ chế đồng bộ slide.
 ```
 
 #### 3. Tự kiểm·GATE 4 — Test-ready
-- [x] **Tự vận hành:** Một tester chưa từng thấy prototype có thể tự mở file [prototype-option-a.html](file:///d:/VIN_BaiLab/Track%201%20chuyen%20sau/K4-Track01-Lab18-2A202601378-PhamDuyHoan/prototype-option-a.html) và hoàn thành task hỏi–đối chiếu–lưu mà không cần người bên cạnh thuyết minh.
-- [x] **Dữ liệu thật:** Nội dung bài học và câu trả lời AI đều lấy từ kịch bản chuẩn RAG & Vector Embeddings 60 trang.
-- [x] **Có cơ chế lấy lại quyền kiểm soát:** Đầy đủ Inline Edit, Dismiss, Undo và nút Reset quay về điểm xuất phát.
+- [x] **Tự vận hành:** Một tester chưa từng thấy prototype có thể tự mở file [prototype-option-a.html](prototype-option-a.html) và hoàn thành task đánh dấu–ghi chú–đối chiếu slide mà không cần hướng dẫn.
+- [x] **Dữ liệu thật:** Slide bài học RAG & Vector Embeddings thực tế với 3 mốc kiến thức rõ ràng.
+- [x] **Có cơ chế lấy lại quyền kiểm soát:** Đầy đủ Inline Edit, Delete bookmark, Undo và nút Reset State.
 
 ---
 
@@ -185,19 +170,19 @@ Do not explain: Không chỉ tay bảo tester phải bấm nút nào; không gi�
 
 - **Phiên kiểm thử:** Do chính **Phạm Duy Hoàn facilitate** (Tester T-02, 35 phút).
 - **Quan sát chính:**
-  - *Tốc độ phản hồi & Bằng chứng:* AI trả lời sau 1.5 giây, thẻ `[Slide 14]` mở đúng vị trí slide giúp đối chiếu ngay mà không cần dừng bài giảng.
-  - *Sự kiểm soát:* Tester đánh giá rất cao việc AI không tự động lưu mà trao quyền cho người học bấm *"Lưu vào Note"*.
-  - *Điểm nghẽn:* Người học ngại gõ câu hỏi dài trong lúc nghe giảng; mong muốn có nút gợi ý câu hỏi 1-click và tính năng inline-edit trước khi lưu.
-- **Next Changes cho Option A:** Bổ sung Quick Prompts (*"Tóm tắt slide này"*) để giảm thao tác gõ phím và thêm tính năng Inline Edit trước khi lưu.
+  - *Tốc độ & Tính kiểm soát:* Tester đánh giá nút "Mark Current Moment" rất tiện lợi vì chỉ mất 1 click để ghi nhớ mốc slide mà không phải dừng lại gõ chữ dài dòng.
+  - *Đối chiếu tài liệu:* Tester rất thích tính năng bấm vào thẻ bookmark để slide tự nhảy về đúng trang bài giảng.
+  - *Ma sát:* Tester đề xuất hỗ trợ phím tắt bàn phím (nhấn phím `M` để đánh dấu nhanh) để không phải rê chuột trong lúc đang tập trung nhìn slide.
+- **Next Changes cho Option A:** Thêm phím tắt `[M]` để đánh dấu tức thì và cho phép chỉnh sửa nội dung ghi chú trực tiếp ngay trên thẻ bookmark (Inline Edit).
 
-📄 *Xem toàn văn biên bản test:* [prototype-feedback-note.md](file:///d:/VIN_BaiLab/Track%201%20chuyen%20sau/K4-Track01-Lab18-2A202601378-PhamDuyHoan/prototype-feedback-note.md).
+📄 *Xem toàn văn biên bản test:* [prototype-feedback-note.md](prototype-feedback-note.md).
 
 ---
 
 ### 5. AI Support Log của riêng tôi
 
-- **AI đã giúp gì:** Gợi ý khung cấu trúc 4 quyết định thiết kế, hỗ trợ code HTML/CSS/JS cho prototype tương tác và soạn câu hỏi debriefing cho buổi test Option A.
-- **AI sai / thiên kiến ở đâu:** Ban đầu AI luôn đề xuất cơ chế "Full Act" (tự động tóm tắt và tự chèn note), đồng thời vẽ thêm nhiều màn hình rườm rà ngoài phạm vi.
-- **Tôi tự sửa:** Chuyển đổi Agency về **Ask / Suggest** với nút Save chủ động; tự thiết kế tính năng Inline Edit, phím tắt Dismiss `Esc` và thẻ trích dẫn 1-click.
+- **AI đã giúp gì:** Hỗ trợ cấu trúc tài liệu theo đúng chuẩn so sánh A/B/C, sinh code HTML/CSS/JS cho prototype tương tác Option A và gợi ý kịch bản test.
+- **AI sai / thiên kiến ở đâu:** Ban đầu AI luôn có xu hướng biến giải pháp thành chatbot hỏi đáp phức tạp (AI Tutor) thay vì tập trung vào trải nghiệm ghi chép sổ tay (AI Notes).
+- **Tôi tự sửa:** Chỉnh lại toàn bộ định hướng về **User-Led Smart Bookmark**, nhấn mạnh quyền kiểm soát của người học, thiết kế tính năng 1-chạm capture và liên kết slide trực tiếp.
 
-📄 *Xem toàn văn nhật ký:* [ai-support-log.md](file:///d:/VIN_BaiLab/Track%201%20chuyen%20sau/K4-Track01-Lab18-2A202601378-PhamDuyHoan/ai-support-log.md).
+📄 *Xem toàn văn nhật ký:* [ai-support-log.md](ai-support-log.md).

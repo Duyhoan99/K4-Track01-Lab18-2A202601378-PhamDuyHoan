@@ -1,0 +1,978 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day 18 Lab - A/B/C AI Notes Prototype</title>
+  <style>
+    :root {
+      --bg: #f6f7f4;
+      --surface: #ffffff;
+      --surface-2: #eef3ef;
+      --ink: #18211c;
+      --muted: #68716a;
+      --line: #d9dfd8;
+      --brand: #216e5b;
+      --brand-2: #e6f3ef;
+      --accent: #b85c38;
+      --accent-2: #fff0e9;
+      --info: #305f9f;
+      --info-2: #eaf1fb;
+      --warn: #9b6b19;
+      --warn-2: #fff6df;
+      --danger: #a94442;
+      --shadow: 0 12px 32px rgba(20, 31, 24, 0.08);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.45;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      border-radius: 7px;
+      padding: 9px 12px;
+      cursor: pointer;
+      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
+    }
+
+    button:hover {
+      border-color: #9eb3aa;
+      transform: translateY(-1px);
+    }
+
+    button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid rgba(33, 110, 91, 0.24);
+      outline-offset: 2px;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .reset {
+      border-color: #d8c8bd;
+      background: #fffaf6;
+      color: #633d2c;
+      white-space: nowrap;
+    }
+
+    main {
+      max-width: 1180px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 18px 20px 28px;
+    }
+
+    .intro {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      gap: 14px;
+    }
+
+    .eyebrow {
+      margin: 0 0 8px;
+      color: var(--brand);
+      font-weight: 750;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .intro h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .intro p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .task-box {
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .task-box strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .tab {
+      text-align: left;
+      background: var(--surface);
+      min-height: 74px;
+      padding: 12px;
+    }
+
+    .tab.active {
+      border-color: var(--brand);
+      background: var(--brand-2);
+      box-shadow: inset 0 0 0 1px var(--brand);
+    }
+
+    .tab span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(330px, 0.98fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .panel-title {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid var(--line);
+      background: var(--surface-2);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .lesson {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .slide {
+      border: 1px solid #c9d3cb;
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, #ffffff 0%, #f8faf8 100%);
+      min-height: 292px;
+      padding: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+    }
+
+    .slide-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .slide h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .slide ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+    }
+
+    .slide li {
+      margin: 7px 0;
+    }
+
+    .quote {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-2);
+      padding: 10px 12px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 14px;
+      color: #5c3827;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: 54px 1fr 54px;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 8px;
+      background: #dce5df;
+      border-radius: 999px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bar::before {
+      content: "";
+      position: absolute;
+      inset: 0 44% 0 0;
+      background: var(--brand);
+      border-radius: inherit;
+    }
+
+    .transcript {
+      background: #fbfcfb;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+    }
+
+    .transcript h4, .section h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .transcript p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .interaction {
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .option-summary {
+      border: 1px solid var(--line);
+      background: #fbfcfb;
+      border-radius: var(--radius);
+      padding: 12px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .option-summary strong {
+      font-size: 15px;
+    }
+
+    .option-summary span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .primary {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .secondary {
+      background: var(--info-2);
+      border-color: #c7d7ef;
+      color: #234d85;
+    }
+
+    .danger {
+      background: #fff2f1;
+      border-color: #e6c8c6;
+      color: var(--danger);
+    }
+
+    textarea, input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px 11px;
+      min-height: 42px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    .section {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: #fff;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: #fbfcfb;
+      display: grid;
+      gap: 8px;
+    }
+
+    .note.selected {
+      border-color: var(--brand);
+      background: var(--brand-2);
+    }
+
+    .note-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .note-title {
+      font-weight: 720;
+      font-size: 14px;
+    }
+
+    .note-text {
+      margin: 0;
+      color: #39423c;
+      font-size: 14px;
+    }
+
+    .small-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .small-actions button {
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+
+    .result {
+      border: 1px solid #c8ddcf;
+      border-radius: var(--radius);
+      background: #f3faf5;
+      padding: 12px;
+      display: none;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    .result h4 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #1f604e;
+    }
+
+    .result ul {
+      margin: 8px 0 0;
+      padding-left: 19px;
+    }
+
+    .decision {
+      border: 1px solid #ddd0a7;
+      background: var(--warn-2);
+      color: #5f4314;
+      border-radius: var(--radius);
+      padding: 12px;
+      display: none;
+    }
+
+    .decision.show {
+      display: block;
+    }
+
+    .decision strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .decision .controls button {
+      background: #fff;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #17251f;
+      color: #fff;
+      border-radius: 8px;
+      padding: 11px 13px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition: opacity 160ms ease, transform 160ms ease;
+      z-index: 50;
+      max-width: min(360px, calc(100vw - 36px));
+      font-size: 14px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 880px) {
+      .topbar, .intro-grid, .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: stretch;
+      }
+
+      .reset {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 620px) {
+      main {
+        padding: 12px;
+      }
+
+      .tabs {
+        grid-template-columns: 1fr;
+      }
+
+      .slide {
+        min-height: 240px;
+        padding: 14px;
+      }
+
+      .slide h3 {
+        font-size: 20px;
+      }
+
+      .panel-head, .note-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .timeline {
+        grid-template-columns: 44px 1fr 44px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="topbar">
+        <div>
+          <h1>Day 18 Lab Prototype: AI Notes A/B/C</h1>
+          <p class="subtitle">Cung mot bai hoc, ba cach chia quyen User-AI khac nhau.</p>
+        </div>
+        <button class="reset" id="resetAll" type="button">Reset prototype</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro" aria-label="Huong dan test">
+        <div class="intro-grid">
+          <div>
+            <p class="eyebrow">Huong dan test ngan</p>
+            <h2>Hay tu thao tac ca 3 option nhu dang hoc mot bai co nhieu thong tin.</h2>
+            <p>Khong can danh gia giao dien dep hay xau. Hay de y cach moi option giup ban ghi lai diem quan trong, xem lai context slide, va quyet dinh note cuoi cung.</p>
+          </div>
+          <div class="task-box">
+            <strong>Outcome task</strong>
+            Sau khi thu tung option, ban can co mot record co the dung de review lai: key points, phan can xem lai, va link den slide lien quan.
+          </div>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="Prototype options">
+        <button class="tab active" type="button" data-tab="a">
+          A. User-Led Smart Bookmark
+          <span>User chu dong danh dau, he thong gan timestamp va slide.</span>
+        </button>
+        <button class="tab" type="button" data-tab="b">
+          B. Co-create AI Draft Notes
+          <span>AI de xuat draft, user giu/sua/xoa truoc khi luu.</span>
+        </button>
+        <button class="tab" type="button" data-tab="c">
+          C. Proactive AI Notes
+          <span>AI tu dong tao notes co cau truc, user review va chot.</span>
+        </button>
+      </nav>
+
+      <section class="workspace">
+        <article class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title">Common lesson fixture</h2>
+            <span class="pill">AI Fundamentals - 10 min - Slide 5/8</span>
+          </div>
+          <div class="lesson">
+            <div class="slide" id="slideCard">
+              <div class="slide-top">
+                <span>Slide 5</span>
+                <span>06:40 - 08:10</span>
+              </div>
+              <div>
+                <h3>Model Risk & Exception Cases</h3>
+                <p>Mot mo hinh AI can duoc danh gia khac nhau tuy muc do rui ro va ngu canh su dung.</p>
+                <ul>
+                  <li>Low risk: goi y noi dung, can user xac nhan.</li>
+                  <li>Medium risk: tu dong phan loai, can audit trail.</li>
+                  <li>High risk: tac dong den quyen loi nguoi dung, can human review.</li>
+                </ul>
+              </div>
+              <div class="quote">Lecturer speed-up: "Ba exception quan trong la du lieu nhay cam, quyet dinh co anh huong lon, va truong hop AI khong du confidence."</div>
+            </div>
+
+            <div class="timeline" aria-label="Lesson timeline">
+              <span>00:00</span>
+              <div class="bar"></div>
+              <span>10:00</span>
+            </div>
+
+            <div class="transcript">
+              <h4>Live transcript excerpt</h4>
+              <p>Neu cac ban khong ghi kip phan nay thi hay nho rang exception case thu hai thuong bi nham: khong phai he thong nao co AI cung high risk, ma la khi output anh huong den quyen loi, diem so, hoac phe duyet cua nguoi dung.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2 class="panel-title" id="optionTitle">Option A interaction</h2>
+            <span class="pill" id="agencyPill">User control high</span>
+          </div>
+
+          <div class="interaction" id="optionA">
+            <div class="option-summary">
+              <strong>A. Smart Bookmark</strong>
+              <span>User van nghe va ghi chu. Khi thay thong tin quan trong hoac khong kip ghi, user bam Mark de luu moc slide.</span>
+            </div>
+            <div class="section">
+              <h4>Your quick note</h4>
+              <textarea id="bookmarkText">Chua kip ghi 3 exception cases, can xem lai slide nay.</textarea>
+              <div class="controls" style="margin-top:8px">
+                <button class="primary" type="button" id="markBookmark">Mark current moment</button>
+                <button class="secondary" type="button" id="openMarkedSlide">Open linked slide</button>
+              </div>
+            </div>
+            <div class="section">
+              <h4>My review points</h4>
+              <div class="list" id="bookmarkList">
+                <div class="note">
+                  <p class="note-text">No bookmarks yet.</p>
+                </div>
+              </div>
+            </div>
+            <div class="result" id="resultA">
+              <h4>Result generated from your action</h4>
+              <p class="note-text">Bookmark saved at 07:18, linked to Slide 5: Model Risk & Exception Cases.</p>
+            </div>
+            <div class="decision" id="decisionA">
+              <strong>User decision</strong>
+              <div class="controls">
+                <button type="button" data-decide="A saved for review">Save to review list</button>
+                <button type="button" data-decide="A needs more manual note">Add more detail manually</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="interaction hidden" id="optionB">
+            <div class="option-summary">
+              <strong>B. Co-create AI Draft Notes</strong>
+              <span>AI tao draft tu transcript va slide. User quyet dinh giu, sua, hoac xoa tung note truoc khi chot.</span>
+            </div>
+            <div class="controls">
+              <button class="primary" type="button" id="generateDrafts">Generate AI draft notes</button>
+            </div>
+            <div class="section">
+              <h4>AI draft notes</h4>
+              <div class="list" id="draftList">
+                <div class="note">
+                  <p class="note-text">Click generate to see canned AI draft notes.</p>
+                </div>
+              </div>
+            </div>
+            <div class="result" id="resultB">
+              <h4>Result after your review</h4>
+              <ul id="confirmedDrafts"></ul>
+            </div>
+            <div class="decision" id="decisionB">
+              <strong>User decision</strong>
+              <div class="controls">
+                <button type="button" data-decide="B confirmed co-created notes">Confirm reviewed notes</button>
+                <button type="button" data-decide="B needs source check">Check source before saving</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="interaction hidden" id="optionC">
+            <div class="option-summary">
+              <strong>C. Proactive AI Notes</strong>
+              <span>AI tu dong capture va organize sau buoi hoc. User review ban cuoi va quyet dinh co tin de luu hay khong.</span>
+            </div>
+            <div class="controls">
+              <button class="primary" type="button" id="buildProactive">Show AI-generated learning notes</button>
+              <button class="secondary" type="button" id="toggleCoverage">Show coverage map</button>
+            </div>
+            <div class="section">
+              <h4>AI learning notes</h4>
+              <div class="list" id="proactiveNotes">
+                <div class="note">
+                  <p class="note-text">Click show to load canned proactive AI notes.</p>
+                </div>
+              </div>
+            </div>
+            <div class="section hidden" id="coverageMap">
+              <h4>Source coverage</h4>
+              <div class="list">
+                <div class="note selected">
+                  <div class="note-row">
+                    <span class="note-title">Slide 5 covered</span>
+                    <span class="pill">07:18</span>
+                  </div>
+                  <p class="note-text">Exception cases and risk-level clarification were captured from transcript + slide.</p>
+                </div>
+                <div class="note">
+                  <div class="note-row">
+                    <span class="note-title">Slides 1-4 summarized</span>
+                    <span class="pill">Auto</span>
+                  </div>
+                  <p class="note-text">Definitions, model input/output, and examples are grouped as background concepts.</p>
+                </div>
+              </div>
+            </div>
+            <div class="result" id="resultC">
+              <h4>Result ready for final review</h4>
+              <p class="note-text">A structured note has been prepared with key concepts, exception cases, review flags, and linked slide references.</p>
+            </div>
+            <div class="decision" id="decisionC">
+              <strong>User decision</strong>
+              <div class="controls">
+                <button type="button" data-decide="C accepted proactive notes">Accept notes</button>
+                <button type="button" data-decide="C wants to edit first">Edit before saving</button>
+                <button type="button" data-decide="C does not trust coverage">Do not save yet</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const state = {
+      active: "a",
+      decisions: []
+    };
+
+    const copy = {
+      a: ["Option A interaction", "User control high"],
+      b: ["Option B interaction", "User + AI co-create"],
+      c: ["Option C interaction", "AI autonomy high"]
+    };
+
+    const draftNotes = [
+      {
+        title: "Keep: Risk depends on usage context",
+        body: "Khong phai moi he thong co AI deu high risk; risk tang khi output anh huong den quyen loi, diem so, hoac phe duyet.",
+        slide: "Slide 5"
+      },
+      {
+        title: "Keep: Three exception cases",
+        body: "Can review ky khi co du lieu nhay cam, quyet dinh anh huong lon, hoac AI khong du confidence.",
+        slide: "Slide 5"
+      },
+      {
+        title: "Needs edit: Human review",
+        body: "High-risk flows nen co human review truoc khi tac dong den nguoi dung.",
+        slide: "Slide 5"
+      }
+    ];
+
+    function qs(selector) {
+      return document.querySelector(selector);
+    }
+
+    function qsa(selector) {
+      return Array.from(document.querySelectorAll(selector));
+    }
+
+    function showToast(message) {
+      const toast = qs("#toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function switchTab(tab) {
+      state.active = tab;
+      qsa(".tab").forEach(button => button.classList.toggle("active", button.dataset.tab === tab));
+      ["A", "B", "C"].forEach(letter => qs(`#option${letter}`).classList.add("hidden"));
+      qs(`#option${tab.toUpperCase()}`).classList.remove("hidden");
+      qs("#optionTitle").textContent = copy[tab][0];
+      qs("#agencyPill").textContent = copy[tab][1];
+    }
+
+    function addBookmark() {
+      const text = qs("#bookmarkText").value.trim() || "Can xem lai phan nay.";
+      qs("#bookmarkList").innerHTML = `
+        <div class="note selected">
+          <div class="note-row">
+            <span class="note-title">07:18 -> Slide 5</span>
+            <span class="pill">Marked by user</span>
+          </div>
+          <p class="note-text">${escapeHtml(text)}</p>
+          <div class="small-actions">
+            <button type="button" id="jumpA">Open slide context</button>
+            <button type="button" id="renameA">Edit label</button>
+          </div>
+        </div>
+      `;
+      qs("#resultA").classList.add("show");
+      qs("#decisionA").classList.add("show");
+      qs("#jumpA").addEventListener("click", () => highlightSlide("Linked slide opened: Slide 5"));
+      qs("#renameA").addEventListener("click", () => {
+        qs("#bookmarkText").focus();
+        showToast("Edit the quick note, then mark again.");
+      });
+      showToast("Bookmark created and linked to Slide 5.");
+    }
+
+    function renderDrafts() {
+      qs("#draftList").innerHTML = draftNotes.map((note, index) => `
+        <div class="note selected" data-draft="${index}">
+          <div class="note-row">
+            <span class="note-title">${note.title}</span>
+            <span class="pill">${note.slide}</span>
+          </div>
+          <textarea aria-label="Edit draft ${index + 1}">${note.body}</textarea>
+          <div class="small-actions">
+            <button type="button" data-action="keep" data-index="${index}">Keep</button>
+            <button type="button" data-action="edit" data-index="${index}">Edit</button>
+            <button type="button" data-action="remove" data-index="${index}">Remove</button>
+            <button type="button" data-action="source" data-index="${index}">Open source</button>
+          </div>
+        </div>
+      `).join("");
+      qsa("[data-action]").forEach(button => button.addEventListener("click", handleDraftAction));
+      updateConfirmedDrafts();
+      qs("#resultB").classList.add("show");
+      qs("#decisionB").classList.add("show");
+      showToast("AI draft loaded. Review each note.");
+    }
+
+    function handleDraftAction(event) {
+      const action = event.currentTarget.dataset.action;
+      const card = event.currentTarget.closest(".note");
+      if (action === "remove") {
+        card.remove();
+        updateConfirmedDrafts();
+        showToast("Draft removed from final notes.");
+        return;
+      }
+      if (action === "edit") {
+        card.querySelector("textarea").focus();
+        showToast("Edit the draft directly in the text box.");
+        return;
+      }
+      if (action === "source") {
+        highlightSlide("Source opened: Slide 5, 07:18");
+        return;
+      }
+      card.classList.add("selected");
+      updateConfirmedDrafts();
+      showToast("Draft kept for final notes.");
+    }
+
+    function updateConfirmedDrafts() {
+      const items = qsa("#draftList .note textarea").map(textarea => textarea.value.trim()).filter(Boolean);
+      qs("#confirmedDrafts").innerHTML = items.length
+        ? items.map(item => `<li>${escapeHtml(item)}</li>`).join("")
+        : "<li>No draft notes selected yet.</li>";
+    }
+
+    function buildProactiveNotes() {
+      qs("#proactiveNotes").innerHTML = `
+        <div class="note selected">
+          <div class="note-row">
+            <span class="note-title">1. Key concept</span>
+            <span class="pill">Slides 1-5</span>
+          </div>
+          <p class="note-text">Model risk should be judged by usage context, not by AI presence alone.</p>
+        </div>
+        <div class="note selected">
+          <div class="note-row">
+            <span class="note-title">2. Important exception cases</span>
+            <span class="pill">Slide 5</span>
+          </div>
+          <p class="note-text">Sensitive data, high-impact decisions, and low-confidence AI output need extra review.</p>
+        </div>
+        <div class="note selected">
+          <div class="note-row">
+            <span class="note-title">3. Suggested review flag</span>
+            <span class="pill">07:18</span>
+          </div>
+          <p class="note-text">Re-check the difference between medium-risk automation and high-risk user-impact decisions.</p>
+        </div>
+      `;
+      qs("#resultC").classList.add("show");
+      qs("#decisionC").classList.add("show");
+      showToast("Proactive AI notes generated.");
+    }
+
+    function highlightSlide(message) {
+      const slide = qs("#slideCard");
+      slide.style.borderColor = "#216e5b";
+      slide.style.boxShadow = "0 0 0 3px rgba(33, 110, 91, 0.18)";
+      showToast(message);
+      window.setTimeout(() => {
+        slide.style.borderColor = "";
+        slide.style.boxShadow = "";
+      }, 1500);
+    }
+
+    function resetAll() {
+      qs("#bookmarkText").value = "Chua kip ghi 3 exception cases, can xem lai slide nay.";
+      qs("#bookmarkList").innerHTML = `<div class="note"><p class="note-text">No bookmarks yet.</p></div>`;
+      qs("#draftList").innerHTML = `<div class="note"><p class="note-text">Click generate to see canned AI draft notes.</p></div>`;
+      qs("#confirmedDrafts").innerHTML = "";
+      qs("#proactiveNotes").innerHTML = `<div class="note"><p class="note-text">Click show to load canned proactive AI notes.</p></div>`;
+      qs("#coverageMap").classList.add("hidden");
+      qsa(".result, .decision").forEach(element => element.classList.remove("show"));
+      state.decisions = [];
+      switchTab("a");
+      showToast("Prototype reset.");
+    }
+
+    function recordDecision(event) {
+      const value = event.currentTarget.dataset.decide;
+      state.decisions.push(value);
+      showToast(`Decision recorded: ${value}`);
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    qsa(".tab").forEach(button => button.addEventListener("click", () => switchTab(button.dataset.tab)));
+    qs("#resetAll").addEventListener("click", resetAll);
+    qs("#markBookmark").addEventListener("click", addBookmark);
+    qs("#openMarkedSlide").addEventListener("click", () => highlightSlide("Current slide context opened."));
+    qs("#generateDrafts").addEventListener("click", renderDrafts);
+    qs("#buildProactive").addEventListener("click", buildProactiveNotes);
+    qs("#toggleCoverage").addEventListener("click", () => {
+      qs("#coverageMap").classList.toggle("hidden");
+      showToast(qs("#coverageMap").classList.contains("hidden") ? "Coverage map hidden." : "Coverage map shown.");
+    });
+    qsa("[data-decide]").forEach(button => button.addEventListener("click", recordDecision));
+  </script>
+</body>
+</html>
