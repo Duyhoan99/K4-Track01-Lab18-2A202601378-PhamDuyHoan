@@ -2,35 +2,35 @@
 
 - **Người thực hiện:** Phạm Duy Hoàn (MHV: 2A202601378)
 - **Nhóm:** 2T1H
-- **Phần việc đảm nhiệm:** Thiết kế & Kiểm thử Option A — Trợ lý AI Q&A giải đáp nhanh có lưu nguồn
+- **Phần việc đảm nhiệm:** Thiết kế & Kiểm thử Option A — User-Led Smart Bookmark *(Người học kiểm soát capture; bấm Mark moment để lưu timestamp, slide hiện tại và note ngắn)*
 
 ---
 
 ## 1. AI đã giúp tôi những gì (Where AI Added Value)
 
-1. **Khung cấu trúc Human–AI Design cho Option A:** AI hỗ trợ tôi phác thảo 4 quyết định thiết kế (Expectation, Role & Agency, Evidence & Uncertainty, Control & Recovery) và bảng quyết định tương tác chi tiết.
-2. **Xây dựng kịch bản kiểm thử (Test Script):** Hỗ trợ chuẩn bị các câu hỏi debriefing và tiêu chí quan sát hành vi người dùng trong phiên thử nghiệm Option A (tốc độ đọc lướt, phản xạ kiểm tra nguồn slide).
-3. **Format và cấu trúc tài liệu:** Hỗ trợ định dạng bảng Markdown và chuẩn hóa cách trình bày các trích dẫn và kết quả quan sát.
+1. **Khung cấu trúc Human–AI Design cho Option A:** AI hỗ trợ tôi phác thảo 4 quyết định thiết kế (Expectation, Role & Agency, Evidence & Uncertainty, Control & Recovery) và bảng so sánh 3 Option theo phổ mức độ tự chủ Human–AI.
+2. **Xây dựng Interactive Micro-Prototype:** Hỗ trợ sinh mã HTML/CSS/JS cho prototype tương tác [prototype-option-a.html](prototype-option-a.html) với thiết kế đồng bộ từ file chung `day-18-abc-notes-prototype.html`.
+3. **Chuẩn bị kịch bản kiểm thử (Test Script):** Hỗ trợ xây dựng kịch bản tester tương tác trực tiếp với slide bài giảng, thao tác bấm Mark moment, gõ note ngắn và đối chiếu liên kết slide.
 
 ---
 
 ## 2. Điểm AI làm sai, hời hợt hoặc thiên kiến mà tôi phát hiện (AI Limitations & Flaws)
 
-1. **Thiên kiến tự động hóa quá mức (Over-automation Bias):**
-   - *Vấn đề:* Ban đầu AI luôn đề xuất cơ chế "Full Act" (AI tự động tóm tắt bài giảng và tự chèn các đoạn note vào sổ tay của user mà không cần hỏi).
-   - *Hệ quả:* Đề xuất này vi phạm quyền tự chủ của người học. Nếu AI tự chèn ghi chú, sổ tay cá nhân sẽ bị loãng và user không có động lực đọc lại để hiểu.
-2. **Thiết kế dàn trải, vi phạm nguyên tắc "chỉ review critical interaction":**
-   - *Vấn đề:* AI gợi ý thêm nhiều màn hình phụ (cài đặt model, dashboard thống kê, xuất file PDF...) thay vì tập trung vào tương tác cốt lõi: *User hỏi vướng mắc trong lúc học → AI trả lời kèm nguồn → User bấm lưu*.
+1. **Thiên kiến biến thành AI Tutor hoặc Tự động hóa quá mức:**
+   - *Vấn đề:* Ban đầu AI luôn có xu hướng biến giải pháp thành chatbot gia sư hỏi đáp phức tạp hoặc tự động tóm tắt toàn bộ bài học (Full Act) mà không để người học tự kiểm soát.
+   - *Hệ quả:* Đề xuất này vi phạm bản chất của Case B (AI Notes) và làm mất tính chủ động của người học trong việc ghi chép.
+2. **Thiết kế dàn trải, thiếu tập trung vào tương tác cốt lõi:**
+   - *Vấn đề:* AI ban đầu đề xuất thêm nhiều chức năng rườm rà (quizzing, thi thử, flashcard phức tạp) thay vì tập trung vào tương tác 1-chạm: *Người học bấm Mark moment $\rightarrow$ Hệ thống lưu timestamp, slide và note ngắn $\rightarrow$ Đối chiếu lại ngữ cảnh slide gốc*.
 3. **Mô tả chung chung, thiếu gắn với Evidence của case:**
-   - *Vấn đề:* Các phản hồi ban đầu của AI không bám sát tình huống người học bị quá tải và mất "45 phút tra cứu tài liệu 60 trang cho bài test 15 phút".
+   - *Vấn đề:* Các phản hồi ban đầu của AI không bám sát tình huống người học bị quá tải và mất *"45 phút tra cứu tài liệu PDF 60 trang cho bài test 15 phút"*.
 
 ---
 
 ## 3. Các điểm tôi đã tự mình điều chỉnh & hoàn thiện (Manual Corrections)
 
-1. **Chuyển đổi Agency về mức Ask / Suggest:**
-   - Tôi kiên quyết thiết lập cơ chế **User-driven Save**: AI chỉ hiển thị draft câu trả lời và số trang nguồn ở sidebar; quyền bấm nút *"Lưu vào Note"* hoàn toàn thuộc về người học.
-2. **Thiết kế các chốt chặn kiểm soát (Human Control & Recovery):**
-   - Tôi tự bổ sung tính năng **Inline Edit** (cho phép người học sửa nhanh vài từ trong draft trước khi lưu), phím tắt đóng nhanh (`Esc`/`X`) để không che slide bài giảng, và thẻ trích dẫn **Citation Badge 1-click** quay về trang PDF gốc.
-3. **Tập trung hóa kịch bản test:**
-   - Tôi lược bỏ các bước kiểm thử rườm rà, tập trung 100% vào tình huống người học gặp đoạn kiến thức khó/lướt nhanh trên slide 14 để kiểm tra tốc độ phản hồi và sự an tâm của người học.
+1. **Định hình lại chuẩn xác Option A là User-Led Smart Bookmark:**
+   - Tôi kiên quyết thiết lập cơ chế **User-Led (Low AI Agency)**: Người học kiểm soát 100% việc đánh dấu khoảnh khắc và nội dung ghi chú; hệ thống chỉ đóng vai trò thư ký lưu chính xác tọa độ timestamp và số trang slide.
+2. **Thiết kế tính năng 1-chạm và phím tắt nhanh `[M]`:**
+   - Tôi tự bổ sung phím tắt bàn phím toàn cục **`[M]`** vào prototype để người học có thể đánh dấu tức thì mà không cần rê chuột làm gián đoạn việc nhìn slide bài giảng.
+3. **Tích hợp tính năng chỉnh sửa trực tiếp (Inline Edit) và xuất đề cương:**
+   - Bổ sung nút **`✏️ Edit note`** ngay trên thẻ bookmark và nút **`📋 Export structured summary`** giúp người học dễ dàng quản lý và sử dụng ghi chú sau buổi học.

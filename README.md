@@ -45,7 +45,7 @@ Hypothesis Problem nhóm tiếp tục:
 | **Situation** | Đang học qua slide/PDF và gặp một điểm quan trọng hoặc chưa hiểu; sau đó cần lưu lại để ôn tập. |
 | **Task** | Tạo một tài nguyên ghi chú bài học cá nhân từ những điểm quan trọng hoặc chưa hiểu, có thể quay lại đúng ngữ cảnh gốc. |
 | **Desired outcome** | Người học có thể xem lại đúng điểm cần ôn mà không phải dò toàn bộ slide/PDF hoặc chỉ dựa vào ghi chú rời rạc. |
-| **Content/data fixture** | Cùng một lesson RAG, cùng slide/PDF và cùng ba điểm: RAG, embeddings và semantic similarity. |
+| **Content/data fixture** | Cùng một lesson *AI Fundamentals & Model Risk (10 phút)*, cùng slide bài học (Slide 5: Model Risk, Slide 6: Mitigation, Slide 8: Governance) và live transcript. |
 
 ### 2. Ba Solution Options
 
@@ -54,7 +54,7 @@ Hypothesis Problem nhóm tiếp tục:
 | **Solution mechanism** | Người học vẫn là người kiểm soát nội dung cần capture. Khi họ thấy một thông tin quan trọng hoặc không kịp ghi, họ bấm **Mark current moment**. Hệ thống lưu timestamp, slide hiện tại, và một note ngắn nếu user nhập vào. | AI tạo **draft notes** từ transcript bài học và context slide. Người học review từng draft, sau đó chọn keep, edit, remove, hoặc mở source để kiểm tra. | AI **tự động capture và tổ chức** nội dung bài học thành một structured note hoàn chỉnh. Người học chủ yếu review output cuối, kiểm tra coverage nếu cần, rồi quyết định accept, edit, hoặc reject notes. |
 | **User làm gì?** | Chủ động bấm "Mark current moment" khi nghe điểm quan trọng/chưa rõ; gõ thêm note ngắn nếu muốn. | Đọc lướt từng draft card do AI sinh ra $\rightarrow$ chọn Keep, Edit, Remove hoặc mở Source để kiểm tra. | Tập trung 100% nghe giảng; khi kết thúc bài, đọc toàn bộ bản structured note, kiểm tra coverage, chọn Accept/Edit/Reject. |
 | **AI làm gì?** | Ghi nhận timestamp, liên kết đúng số trang slide và note ngắn của user; không tự ý suy diễn nội dung khi chưa có lệnh. | Lắng nghe transcript và context slide, tự động tạo các draft notes ngắn dạng thẻ gợi ý theo thời gian thực. | Tự động phân tích, trích xuất, cấu trúc hóa và biên soạn toàn bộ nội dung bài học thành một bản ghi chú hoàn chỉnh. |
-| **Trigger** | Người học bấm "Mark current moment" (hoặc phím tắt nhanh). | Xuất hiện tự động theo từng ý mới trong transcript hoặc khi chuyển slide. | Kết thúc bài học (End-of-lesson trigger). |
+| **Trigger** | Người học bấm "Mark current moment" (hoặc phím tắt nhanh `[M]`). | Xuất hiện tự động theo từng ý mới trong transcript hoặc khi chuyển slide. | Kết thúc bài học (End-of-lesson trigger). |
 | **Quyền quyết định** | Người học toàn quyền quyết định thời điểm và nội dung được capture. | Người học kiểm duyệt từng draft trước khi đưa vào sổ tay chính thức. | Người học kiểm soát ở đầu ra cuối cùng (Batch Review: Accept / Edit / Reject). |
 | **Trade-off chính** | Kiểm soát tối đa, 0% rủi ro AI ảo giác, nhưng người học vẫn phải phân tâm bấm nút trong lúc nghe giảng. | Giảm đáng kể công gõ chữ, nhưng người học cần phân tâm nhẹ để liên tục review các draft card xuất hiện. | Người học hoàn toàn rảnh tay khi học, nhưng mất công kiểm tra lại toàn bộ bản note dài ở cuối bài và có nguy cơ AI bỏ sót ý quan trọng. |
 
@@ -78,7 +78,7 @@ Hypothesis Problem nhóm tiếp tục:
 
 ### 4. Design Guardrails
 
-- **Option A (User-Led):** Phải có nút **Mark current moment** bấm 1-chạm hoặc phím tắt; tự động bắt đúng số slide và timestamp; hỗ trợ gõ note ngắn tùy chọn.
+- **Option A (User-Led):** Phải có nút **Mark current moment** bấm 1-chạm hoặc phím tắt `[M]`; tự động bắt đúng số slide và timestamp; hỗ trợ gõ note ngắn tùy chọn.
 - **Option B (Co-create):** Mỗi draft note do AI tạo ra phải có đủ 4 hành động rõ ràng: **Keep**, **Edit**, **Remove**, và **View Source (Slide/Transcript)**.
 - **Option C (Proactive):** Phải cung cấp màn hình **Coverage Check** và bộ 3 hành động quyết định ở cuối bài: **Accept all**, **Edit section**, **Reject**.
 
@@ -90,7 +90,7 @@ Hypothesis Problem nhóm tiếp tục:
 
 ### 1. Đóng góp của tôi trong bài làm Day 18
 1. **Thiết kế chi tiết Human–AI Interaction cho Option A:** Định nghĩa 4 quyết định thiết kế cho cơ chế User-Led Smart Bookmark, xây dựng bảng tương tác, chốt mức độ agency và cơ chế recovery khi bấm nhầm hoặc muốn sửa note.
-2. **Xây dựng Interactive Micro-Prototype cho Option A (Chặng 4):** Xây dựng giao diện web tương tác [prototype-option-a.html](prototype-option-a.html) với nút 1-chạm *"Mark Current Moment"*, tự động bắt timestamp & slide, ô nhập note ngắn tùy chọn, và danh sách bookmark feed với đầy đủ Edit/Delete/View Source.
+2. **Xây dựng Interactive Micro-Prototype cho Option A (Chặng 4):** Xây dựng giao diện web tương tác [prototype-option-a.html](prototype%20_canhan/prototype-option-a.html) với nút 1-chạm *"Mark Current Moment"*, tự động bắt timestamp & slide, ô nhập note ngắn tùy chọn, và danh sách bookmark feed với đầy đủ Edit/Delete/Open slide context.
 3. **Trực tiếp Facilitate phiên kiểm thử Option A:** Điều phối phiên test thực tế với Tester T-02 (35 phút), ghi nhận quan sát trực tiếp, trích dẫn, ma sát và phản hồi của người học.
 4. **Cập nhật dữ liệu cá nhân vào các tài liệu nhóm:** Điền kết quả Option A vào [three-option-design-sheet.md](three-option-design-sheet.md), [prototype-link.md](prototype-link.md) và [group-feedback-synthesis.md](group-feedback-synthesis.md).
 5. **Viết AI Support Log cá nhân:** Tự đánh giá quá trình tương tác với AI và ghi lại các điểm bản thân đã tự điều chỉnh.
@@ -101,19 +101,19 @@ Hypothesis Problem nhóm tiếp tục:
 
 #### Bốn quyết định thiết kế
 1. **Expectation (Kỳ vọng & Giới hạn):**
-   - *Trước khi hoạt động:* Giao diện hiển thị rõ ràng nút bấm *"🔖 Mark Current Moment"* kèm phím tắt `[M]`. User hiểu rõ hệ thống sẽ đánh dấu đúng mốc thời gian và trang slide đang mở, kèm ghi chú ngắn nếu user muốn nhập.
-   - *Capability:* Bắt chính xác timestamp (giờ:phút:giây), số trang slide hiện tại (`Slide 05, 12, 14`), và lưu kèm note cá nhân của user.
+   - *Trước khi hoạt động:* Giao diện hiển thị rõ ràng nút bấm *"🔖 Mark current moment"* kèm phím tắt `[M]`. User hiểu rõ hệ thống sẽ đánh dấu đúng mốc thời gian và trang slide đang mở, kèm ghi chú ngắn nếu user muốn nhập.
+   - *Capability:* Bắt chính xác timestamp (`07:18`), số trang slide hiện tại (`Slide 5, 6, 8`), và lưu kèm note cá nhân của user.
    - *Limit:* Hệ thống không tự ý tóm tắt dài dòng hay tự ý thêm bớt nội dung khi user chưa bấm Mark.
 2. **Role and Agency (Phân vai & Mức độ chủ động):**
    - *Phân vai:* User toàn quyền quyết định khi nào cần đánh dấu khoảnh khắc quan trọng. Hệ thống đóng vai trò thư ký ghi nhớ tọa độ chính xác.
    - *Agency tại Critical Moment:* **User-Led (Don't Act without trigger)** — Hệ thống chỉ ghi nhận khi có thao tác bấm từ người học, đảm bảo sổ tay hoàn toàn sạch sẽ và chỉ chứa những gì người học thực sự quan tâm.
    - *Hậu quả khi sai:* User chỉ mất 1 click xóa hoặc sửa; rủi ro bằng 0 vì nội dung do chính user kiểm soát.
 3. **Evidence and Uncertainty (Căn cứ & Xử lý bất định):**
-   - *Evidence:* Thẻ bookmark luôn hiển thị rõ `Slide X` và `Timestamp 09:15:30`. Khi click vào thẻ, slide bài giảng lập tức nhảy về đúng trang đó và phát sáng câu chứng cứ màu vàng.
-   - *Uncertainty:* Nếu user bấm Mark mà không nhập chữ, hệ thống tự động gán nhãn *"Đánh dấu khoảnh khắc Slide X"* để user không bị rỗng nội dung.
+   - *Evidence:* Thẻ bookmark luôn hiển thị rõ `07:18 ➔ Slide 5: Model Risk`. Khi click vào thẻ, slide bài giảng lập tức nhảy về đúng trang đó và phát sáng viền xanh đối chiếu.
+   - *Uncertainty:* Nếu user bấm Mark mà không nhập chữ, hệ thống tự động gán nhãn *"Đánh dấu khoảnh khắc tại Slide X"* để user không bị rỗng nội dung.
 4. **Control and Recovery (Kiểm soát & Phục hồi):**
-   - *Kiểm soát:* Nút 1-chạm Mark moment, Inline Edit trực tiếp trên thẻ bookmark, Toggle cờ "❓ Chưa hiểu", Nút Xóa (Delete).
-   - *Phục hồi:* Hỗ trợ Hoàn tác (Undo) ngay sau khi xóa hoặc đánh dấu nhầm; nút Reset State khôi phục trạng thái ban đầu.
+   - *Kiểm soát:* Nút 1-chạm Mark moment, Inline Edit trực tiếp trên thẻ bookmark, Phím tắt bàn phím `[M]`, Nút Xóa (Remove).
+   - *Phục hồi:* Hỗ trợ nút Edit sửa lại note bất cứ lúc nào; nút Reset State khôi phục trạng thái ban đầu.
 
 #### Human–AI Decision Table cho Option A
 
@@ -122,8 +122,8 @@ Hypothesis Problem nhóm tiếp tục:
 | **User làm gì? AI/Hệ thống làm gì?** | **User:** Bấm nút "Mark current moment" (hoặc phím `M`) khi nghe điểm quan trọng; gõ thêm note ngắn nếu muốn. <br>**Hệ thống:** Lưu chính xác timestamp, liên kết đúng số trang slide và note cá nhân vào sổ tay. |
 | **AI Act / Ask / Don't Act? Vì sao?** | **Don't Act without trigger (User-Led)**: Chỉ kích hoạt khi user bấm nút. Giúp người học kiểm soát 100% nội dung sổ tay. |
 | **User hiểu capability/limit bằng gì?** | Nút bấm có gắn phím tắt rõ ràng, nhãn hiển thị slide đang theo dõi, hướng dẫn *"Hệ thống sẽ lưu vị trí slide & timestamp hiện tại"*. |
-| **Evidence & Uncertainty được thể hiện thế nào?** | Thẻ bookmark gắn nhãn `Slide X • Timestamp`. Click vào thẻ sẽ mở đúng slide và highlight đoạn chứng cứ. |
-| **User kiểm soát và recovery thế nào?** | Sửa trực tiếp (Inline Edit), Xóa thẻ bookmark, Hoàn tác (Undo), mở lại slide gốc bằng 1-click. |
+| **Evidence & Uncertainty được thể hiện thế nào?** | Thẻ bookmark gắn nhãn `Timestamp ➔ Slide X`. Click vào thẻ sẽ mở đúng slide và highlight viền xanh đối chiếu. |
+| **User kiểm soát và recovery thế nào?** | Sửa trực tiếp (Inline Edit), Xóa thẻ bookmark (Remove), xuất tóm tắt (Export), mở lại slide gốc bằng 1-click. |
 
 #### Feedback and data check
 - Phản hồi của user (thêm note, sửa, xóa bookmark) được lưu cục bộ trong phiên học, không làm thay đổi bài giảng gốc.
@@ -140,29 +140,29 @@ Hypothesis Problem nhóm tiếp tục:
 
 #### 1. Scope chuẩn của Micro-Prototype Option A
 - **Trạng thái 1: COMMON CONTEXT (Màn hình bài học chung):**
-  - Màn hình bài giảng slide PDF (Slide 05, 12, 14 / 60) với thanh trượt slide và hiển thị thời gian học theo thời gian thực.
-  - Khung Smart Bookmark bên phải với nút bấm 1-chạm **"🔖 Mark Current Moment"** (Phím tắt `[M]`) và ô nhập note ngắn.
+  - Màn hình bài giảng slide PDF (Slide 5: Model Risk, Slide 6: Mitigation, Slide 8: Governance) với thanh timeline 10 phút và live transcript.
+  - Khung Smart Bookmark bên phải với nút bấm 1-chạm **"🔖 Mark current moment"** (Phím tắt `[M]`) và ô nhập note ngắn.
 - **Trạng thái 2: CRITICAL INTERACTION (Đánh dấu khoảnh khắc & Ghi chú nhanh):**
-  - Người học bấm *"Mark Current Moment"*: Thẻ bookmark được tạo ngay lập tức trong 0.1 giây, tự động đính kèm `Slide 05` và `Timestamp hiện tại`.
-  - Hỗ trợ gõ nhanh 1 dòng note cá nhân và tích chọn cờ `❓ Chưa hiểu`.
+  - Người học bấm *"Mark current moment"*: Thẻ bookmark được tạo ngay lập tức trong 0.1 giây, tự động đính kèm `Slide 5` và `Timestamp 07:18`.
+  - Hỗ trợ gõ nhanh 1 dòng note cá nhân: *"Chưa kịp ghi 3 exception cases, cần xem lại slide này"*.
 - **Trạng thái 3: RESULT / USER DECISION & RECOVERY (Quản lý & Đối chiếu Bookmark):**
-  - Danh sách Smart Bookmarks hiển thị theo dòng thời gian bài học.
-  - Khi click vào bất kỳ bookmark nào, slide bên trái lập tức chuyển đến đúng trang slide tương ứng và highlight nội dung.
-  - Hỗ trợ đầy đủ các nút kiểm soát: **✏️ Sửa note**, **🗑️ Xóa bookmark**, **⟲ Reset State**.
+  - Danh sách Smart Bookmarks hiển thị trong mục *My review points*.
+  - Khi click vào bất kỳ bookmark nào, slide bên trái lập tức chuyển đến đúng trang slide tương ứng và highlight viền xanh.
+  - Hỗ trợ đầy đủ các nút kiểm soát: **✏️ Edit note**, **🗑️ Remove bookmark**, **📋 Export structured summary**, **⟲ Reset prototype**.
 
 #### 2. Prototype Annotation (Dành cho Facilitator kiểm thử Option A)
 
 ```text
 OPTION A PROTOTYPE (User-Led Smart Bookmark with Timestamp, Slide Linking & Quick Note)
-We expect the tester to: Thử bấm nút "Mark Current Moment" khi đang xem slide bài giảng, thử gõ một dòng ghi chú ngắn hoặc đánh dấu "Chưa hiểu", sau đó bấm vào thẻ bookmark đã lưu để kiểm tra xem slide có tự động nhảy đến đúng trang hay không.
+We expect the tester to: Thử bấm nút "Mark current moment" khi đang xem slide bài giảng (hoặc nhấn phím M), thử gõ một dòng ghi chú ngắn cá nhân, sau đó chuyển sang slide khác và bấm vào thẻ bookmark đã lưu để kiểm tra xem slide có tự động nhảy về đúng trang hay không.
 Watch for: Tester có thao tác bấm Mark nhanh chóng không; tester có gặp khó khăn khi vừa nghe giảng vừa gõ note không; tester có sử dụng tính năng click vào bookmark để đối chiếu lại slide gốc không.
-Do not explain: Không hướng dẫn tester phải bấm nút nào; để tester tự bấm nút "Mark Current Moment", tự sửa nội dung note và tự trải nghiệm cơ chế đồng bộ slide.
+Do not explain: Không hướng dẫn tester phải bấm nút nào; để tester tự bấm nút "Mark current moment", tự sửa nội dung note và tự trải nghiệm cơ chế đồng bộ slide.
 ```
 
 #### 3. Tự kiểm·GATE 4 — Test-ready
-- [x] **Tự vận hành:** Một tester chưa từng thấy prototype có thể tự mở file [prototype-option-a.html](prototype-option-a.html) và hoàn thành task đánh dấu–ghi chú–đối chiếu slide mà không cần hướng dẫn.
-- [x] **Dữ liệu thật:** Slide bài học RAG & Vector Embeddings thực tế với 3 mốc kiến thức rõ ràng.
-- [x] **Có cơ chế lấy lại quyền kiểm soát:** Đầy đủ Inline Edit, Delete bookmark, Undo và nút Reset State.
+- [x] **Tự vận hành:** Một tester chưa từng thấy prototype có thể tự mở file [prototype-option-a.html](prototype%20_canhan/prototype-option-a.html) và hoàn thành task đánh dấu–ghi chú–đối chiếu slide mà không cần hướng dẫn.
+- [x] **Dữ liệu thật:** Slide bài học AI Fundamentals & Model Risk thực tế với 3 mốc kiến thức rõ ràng.
+- [x] **Có cơ chế lấy lại quyền kiểm soát:** Đầy đủ Inline Edit, Delete bookmark, Export và nút Reset prototype.
 
 ---
 
@@ -170,7 +170,7 @@ Do not explain: Không hướng dẫn tester phải bấm nút nào; để teste
 
 - **Phiên kiểm thử:** Do chính **Phạm Duy Hoàn facilitate** (Tester T-02, 35 phút).
 - **Quan sát chính:**
-  - *Tốc độ & Tính kiểm soát:* Tester đánh giá nút "Mark Current Moment" rất tiện lợi vì chỉ mất 1 click để ghi nhớ mốc slide mà không phải dừng lại gõ chữ dài dòng.
+  - *Tốc độ & Tính kiểm soát:* Tester đánh giá nút "Mark current moment" rất tiện lợi vì chỉ mất 1 click để ghi nhớ mốc slide mà không phải dừng lại gõ chữ dài dòng.
   - *Đối chiếu tài liệu:* Tester rất thích tính năng bấm vào thẻ bookmark để slide tự nhảy về đúng trang bài giảng.
   - *Ma sát:* Tester đề xuất hỗ trợ phím tắt bàn phím (nhấn phím `M` để đánh dấu nhanh) để không phải rê chuột trong lúc đang tập trung nhìn slide.
 - **Next Changes cho Option A:** Thêm phím tắt `[M]` để đánh dấu tức thì và cho phép chỉnh sửa nội dung ghi chú trực tiếp ngay trên thẻ bookmark (Inline Edit).

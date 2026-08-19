@@ -1,59 +1,63 @@
 # Prototype Feedback Note — Day 18
 
 - **Người thực hiện facilitate:** Phạm Duy Hoàn (MHV: 2A202601378)
-- **Giải pháp kiểm thử chính:** **Option A — [AI] Trợ lý ảo giải đáp nhanh các câu hỏi vướng mắc / điều khoản luật ngay trong lúc học có lưu nguồn**
-- **Người tham gia test (Tester):** Tester T-02 (Sinh viên kỹ thuật, thường xuyên học qua slide/video kỹ thuật số lượng lớn)
+- **Giải pháp kiểm thử chính:** **Option A — User-Led Smart Bookmark** *(Người học kiểm soát capture; bấm Mark moment để lưu timestamp, slide hiện tại và note ngắn)*
+- **Người tham gia test (Tester):** Tester T-02 (Sinh viên kỹ thuật, thường xuyên học qua slide bài giảng có mật độ thông tin cao)
 - **Thời lượng phiên test:** 35 phút (10 phút làm quen kịch bản, 15 phút tương tác trực tiếp với prototype trong bài học, 10 phút debrief phỏng vấn sâu)
 
 ---
 
 ## 1. Bối cảnh & Nhiệm vụ kiểm thử (Setup & Task)
 
-- **Kịch bản:** Tester theo dõi một video bài giảng kỹ thuật 15 phút về chủ đề RAG & Vector Database.
+- **Kịch bản:** Tester theo dõi bài giảng kỹ thuật *AI Fundamentals & Model Risk* (Slide 5/8: *Model Risk & Exception Cases*). Giảng viên nói nhanh qua 3 trường hợp ngoại lệ quan trọng (dữ liệu nhạy cảm, quyết định ảnh hưởng lớn, AI không đủ confidence).
 - **Nhiệm vụ của Tester:**
-  1. Khi gặp khái niệm "Cosine Similarity vs Dot Product" lướt qua quá nhanh trên slide 14, sử dụng thanh trợ lý AI để hỏi làm rõ.
-  2. Đọc phản hồi của AI, kiểm tra trích dẫn nguồn, và quyết định có lưu vào sổ tay ôn tập hay không.
-  3. Sau bài học, mở mục ôn tập để chuẩn bị cho bài mini-test 5 câu hỏi.
+  1. Khi giảng viên giảng nhanh qua đoạn khó không kịp chép, bấm nút **"Mark current moment"** (hoặc nhấn phím tắt **[M]**) để lưu lại mốc kiến thức.
+  2. Nhập một dòng ghi chú ngắn cá nhân: *"Chưa kịp ghi 3 exception cases, cần xem lại slide này"*.
+  3. Chuyển sang slide khác (Slide 6 hoặc Slide 8), sau đó bấm vào thẻ bookmark đã lưu trong mục *My review points* để kiểm tra xem slide có tự động nhảy về đúng Slide 5 hay không.
+  4. Thử nghiệm chỉnh sửa ghi chú (**Edit note**), xóa bookmark (**Remove**), và lưu quyết định ôn tập.
 
 ---
 
 ## 2. Quan sát thực tế (Direct Observations)
 
 ### Hành vi tích cực & Điểm mượt mà:
-1. **Tốc độ phản hồi và nắm bắt:** Khi gặp đoạn công thức khó, tester mở ngay sidebar AI và gõ *"Công thức Cosine Similarity ở slide này là gì?"*. AI phản hồi sau 1.5 giây với 2 gạch đầu dòng ngắn gọn và trích dẫn `[Slide 14 - Đoạn 2]`. Tester đọc lướt trong 4 giây và hiểu ngay mà không cần dừng video bài giảng.
-2. **Tác vụ lưu note chủ động:** Tester chủ động bấm nút *"Lưu vào Note"*. Khi được hỏi, tester chia sẻ: *"Mình thích việc nó không tự động nhét vào sổ tay. Mình chỉ muốn lưu những câu mình thấy giải thích hay và đúng trọng tâm"*.
-3. **Tra cứu ngược 1-click:** Tester bấm thử vào thẻ `[Slide 14]` trên câu trả lời, màn hình slide lập tức nhảy đúng vị trí để tester đối chiếu hình vẽ minh họa.
+1. **Thao tác 1-chạm tức thì:** Khi giảng viên nói lướt qua 3 trường hợp exception, tester chỉ mất chưa đầy 1 giây để bấm nút *"Mark current moment"* (hoặc nhấn phím `M`). Hệ thống bắt ngay mốc thời gian `07:18` và liên kết với `Slide 5`.
+2. **Không làm gián đoạn bài giảng:** Tester không phải dừng lại gõ một đoạn văn dài, giúp tester duy trì sự tập trung 100% vào lời giảng tiếp theo của giảng viên.
+3. **Đồng bộ ngữ cảnh ngược 1-click:** Sau khi chuyển sang Slide 8, tester bấm vào thẻ bookmark `07:18 ➔ Slide 5: Model Risk`, màn hình slide bên trái lập tức chuyển về đúng Slide 5 và viền slide phát sáng màu xanh thương hiệu (`var(--brand)`), giúp tester đối chiếu ngay hình vẽ minh họa và trích dẫn bài giảng.
+4. **Quyền kiểm soát trọn vẹn:** Tester thử nghiệm nút `✏️ Edit note` để diễn đạt lại câu chữ theo ý mình và đánh giá cao việc hệ thống chỉ lưu những gì do chính tay tester bấm đánh dấu.
 
 ### Ma sát & Điểm bối rối (Friction & Hesitations):
-1. **Phân vân khi gõ câu hỏi:** Ở lần hỏi thứ hai, tester mất 12 giây để suy nghĩ và gõ câu hỏi dài vì sợ AI không hiểu ngữ cảnh đang nói về phần nào. Tester nhận xét: *"Nếu có nút bấm nhanh kiểu 'Giải thích slide hiện tại' thì đỡ phải gõ tay trong lúc đang nghe giảng"*.
-2. **Nhu cầu chỉnh sửa trước khi lưu:** Tester muốn sửa lại 1 từ trong câu trả lời của AI theo cách diễn giải cá nhân trước khi bấm lưu, nhưng giao diện prototype lúc đầu chỉ cho phép bấm "Lưu toàn bộ" mà chưa có ô edit trực tiếp.
-3. **Lo ngại che khuất màn hình:** Khi mở thanh chat bên phải, khung hình video slide bị co lại khoảng 25%, khiến tester phải nheo mắt nhìn sơ đồ bên trái.
+1. **Phân tâm khi rê chuột:** Trong lần đánh dấu đầu tiên, tester phải rời mắt khỏi slide để rê chuột sang khung bên phải tìm nút bấm. Tester gợi ý: *"Nếu có phím tắt bàn phím kiểu bấm phím M là hệ thống tự đánh dấu thì tiện hơn rất nhiều"*.
+2. **Nhu cầu xuất đề cương tổng hợp:** Sau khi kết thúc bài học với nhiều mốc bookmark, tester muốn có nút xuất nhanh toàn bộ danh sách bookmark thành một bản tóm tắt có cấu trúc để in ra hoặc lưu vào Notion ôn thi.
 
 ---
 
 ## 3. Trích dẫn đáng chú ý (User Quotes)
 
-> *"Lúc đi học sợ nhất là giảng viên nói lướt qua một thuật ngữ mới rồi sang slide khác luôn, mình ghi không kịp là coi như mất dấu. Có con AI này tóm tắt tại chỗ và chỉ rõ nó nằm ở slide nào làm mình an tâm hơn hẳn."*
+> *"Lúc giảng viên nói lướt qua phần khó, mình chỉ cần gõ nhẹ một nút là hệ thống tự ghim lại phút 07:18 ở Slide 5. Mình không phải cuống cuồng cắm đầu gõ chữ dài dòng làm lỡ mất đoạn giảng tiếp theo."*
 
-> *"Tôi không muốn AI tự động ghi chú hộ tôi toàn bộ. Nó chỉ nên đóng vai trò phụ tá tra cứu khi tôi hỏi. Việc tôi bấm nút 'Lưu' giống như một hành động xác nhận là tôi đã hiểu ý đó."*
+> *"Thích nhất là cái nút bấm mở slide ngữ cảnh. Sau buổi học bấm vào cái bookmark là màn hình tự nhảy về đúng Slide 5 có viền xanh phát sáng, không phải mất 45 phút lật từng trang PDF 60 trang tìm lại."*
 
-> *"Cái hay nhất là cái link nhảy về đúng slide. Bình thường sau buổi học mở file PDF 60 trang tìm lại cái công thức mất cả chục phút, giờ bấm một phát là ra ngay."*
+> *"Với Option A, mình là người kiểm soát 100% sổ tay của mình. Mình đánh dấu chỗ nào thì lưu chỗ đó, không sợ AI tự tiện tóm tắt sai hoặc nhét rác vào sổ tay cá nhân."*
 
 ---
 
 ## 4. Đánh giá theo 4 Tiêu chí Human–AI Design
 
-1. **Expectation:** Đạt. Tester hiểu ngay AI là trợ lý tra cứu nội bộ slide nhờ dòng placeholder *"Hỏi nhanh điều khoản/khái niệm trong slide..."*.
-2. **Role & Agency:** Rất tốt. Mức độ **Suggest / Ask** (AI đề xuất câu trả lời, User bấm Lưu) được tester đánh giá cao vì giữ được quyền kiểm soát thông tin cá nhân.
-3. **Evidence & Uncertainty:** Đạt. Badge dẫn nguồn `[Slide X]` tạo sự tin cậy cao; tester thực sự click vào nguồn để kiểm chứng.
-4. **Control & Recovery:** Cần cải thiện thêm: Cần bổ sung tính năng inline-edit (sửa nhanh text trước khi lưu) và phím tắt đóng nhanh (`Esc`) để không ảnh hưởng tầm nhìn bài giảng.
+1. **Expectation (Kỳ vọng):** Đạt xuất sắc. Tester hiểu ngay cơ chế lưu tọa độ slide & timestamp mà không bị nhầm lẫn sang chatbot hỏi đáp.
+2. **Role & Agency (Phân vai & Quyền tự chủ):** Rất tốt. Mức độ **User-Led (Don't Act without trigger)** giúp người học giữ trọn quyền kiểm soát nội dung nạp vào sổ tay cá nhân.
+3. **Evidence & Uncertainty (Căn cứ & Bất định):** Đạt. Thẻ bookmark hiển thị rõ `07:18 ➔ Slide 5`, click là nhảy đúng slide gốc với hiệu ứng phát sáng viền.
+4. **Control & Recovery (Kiểm soát & Phục hồi):** Rất tốt. Cung cấp đầy đủ tính năng sửa ghi chú (Inline Edit), xóa (Remove), hoàn tác (Undo) và nút Reset Prototype.
 
 ---
 
 ## 5. Kết luận & Đề xuất điều chỉnh (Takeaways & Iterations)
 
-- **Giữ lại:** Cơ chế hỏi–đáp kèm thẻ trích dẫn nguồn 1-click và nút lưu chủ động (User-driven Save).
-- **Cải tiến trong sprint tới:**
-  - Thêm gợi ý câu hỏi 1-click (Quick Prompts: *"Tóm tắt slide này"*, *"Giải thích thuật ngữ chính"*).
-  - Cho phép inline edit nội dung tóm tắt trước khi bấm lưu vào note.
-  - Tối ưu hóa UI: dạng popover nổi trong suốt hoặc tự động ẩn khi không tương tác để không che slide bài học.
+- **Giữ lại:**
+  - Nút bấm 1-chạm **"Mark current moment"** tự động bắt timestamp và slide hiện tại.
+  - Cơ chế đồng bộ 1-click từ thẻ bookmark nhảy ngược về đúng slide bài giảng kèm hiệu ứng viền xanh.
+  - Quyền kiểm soát 100% thuộc về người học (User-Led Capture).
+- **Cải tiến đã thực hiện ngay vào prototype cá nhân [prototype-option-a.html](prototype-option-a.html):**
+  - Tích hợp phím tắt bàn phím toàn cục **`[M]`** để người học bấm đánh dấu tức thì mà không cần rê chuột.
+  - Thêm chức năng **`✏️ Edit note`** trực tiếp trên từng thẻ bookmark.
+  - Bổ sung nút **`📋 Export structured summary`** để xuất nhanh danh sách mốc ôn tập có cấu trúc.

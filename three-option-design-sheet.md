@@ -15,7 +15,7 @@
 | **Situation** | Đang học qua slide/PDF và gặp một điểm quan trọng hoặc chưa hiểu; sau đó cần lưu lại để ôn tập. |
 | **Task** | Tạo một tài nguyên ghi chú bài học cá nhân từ những điểm quan trọng hoặc chưa hiểu, có thể quay lại đúng ngữ cảnh gốc. |
 | **Desired outcome** | Người học có thể xem lại đúng điểm cần ôn mà không phải dò toàn bộ slide/PDF hoặc chỉ dựa vào ghi chú rời rạc. |
-| **Content/data fixture** | Cùng một lesson RAG, cùng slide/PDF và cùng ba điểm: RAG, embeddings và semantic similarity. |
+| **Content/data fixture** | Cùng một lesson *AI Fundamentals & Model Risk (10 phút)*, cùng slide bài học (Slide 5: Model Risk, Slide 6: Mitigation, Slide 8: Governance) và live transcript. |
 
 ---
 
@@ -38,6 +38,6 @@
 - **Distance Check (Định vị Option A):**
   - Option A đại diện cho mức **Tự chủ AI Thấp nhất (User-Led / Low AI Agency)** trong phổ giải pháp. Người học giữ trọn 100% quyền kiểm soát việc đánh dấu khoảnh khắc (Capture Moment) và nội dung ghi chú, AI/Hệ thống chỉ đóng vai trò thư ký ghi nhận tọa độ chính xác (Timestamp + Slide Number).
 - **Design Guardrails cho Option A:**
-  - Nút **Mark Current Moment** phải hỗ trợ thao tác 1-chạm hoặc phím tắt nhanh `[M]`.
+  - Nút **Mark current moment** phải hỗ trợ thao tác 1-chạm hoặc phím tắt nhanh `[M]`.
   - Thẻ bookmark bắt buộc phải lưu kèm số trang `Slide X` và `Timestamp` để người học click là quay lại đúng vị trí slide gốc.
-  - Cung cấp đầy đủ tính năng Inline Edit, Delete bookmark và Hoàn tác (Undo).
+  - Cung cấp đầy đủ tính năng Inline Edit, Delete bookmark, Export và nút Reset prototype.
